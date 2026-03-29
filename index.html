@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brand Marketing Solutions Hub</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      background: #0d0d14;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13,13,20,.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      padding: 0 48px;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 15px; font-weight: 900; letter-spacing: .5px;
+      color: #fff;
+    }
+    .nav-logo span { color: #ff3060; }
+    .nav-links { display: flex; gap: 8px; }
+    .nav-link {
+      font-size: 12px; font-weight: 700;
+      padding: 6px 14px; border-radius: 20px;
+      text-decoration: none; color: rgba(255,255,255,.6);
+      transition: all .2s;
+      border: 1px solid transparent;
+    }
+    .nav-link:hover {
+      color: #fff; background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.15);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 140px 64px 80px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute; top: 60px; left: 50%;
+      transform: translateX(-50%);
+      width: 800px; height: 500px;
+      background: radial-gradient(ellipse, rgba(255,48,96,.10) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 11px; font-weight: 800; letter-spacing: 3px;
+      text-transform: uppercase; color: #ff3060;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: 58px; font-weight: 900; line-height: 1.12;
+      letter-spacing: -2px; margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: normal; color: #ff3060; }
+    .hero-sub {
+      font-size: 17px; color: rgba(255,255,255,.5);
+      line-height: 1.7; max-width: 580px; margin: 0 auto 48px;
+    }
+    .hero-tags {
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    }
+    .hero-tag {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.6);
+      font-size: 12px; font-weight: 600;
+      padding: 6px 16px; border-radius: 20px;
+    }
+
+    /* ── CARDS GRID ── */
+    .cards-section {
+      padding: 32px 64px 80px;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .card {
+      border-radius: 20px;
+      overflow: hidden;
+      text-decoration: none;
+      position: relative;
+      display: flex; flex-direction: column;
+      transition: transform .25s, box-shadow .25s;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+    }
+    .card-inner {
+      flex: 1;
+      padding: 36px 36px 28px;
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column;
+    }
+    .card-tag {
+      font-size: 10px; font-weight: 900; letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 12px; border-radius: 20px;
+      display: inline-block; margin-bottom: 20px;
+      width: fit-content;
+    }
+    .card h2 {
+      font-size: 24px; font-weight: 900; line-height: 1.25;
+      margin-bottom: 12px; color: #fff;
+    }
+    .card-desc {
+      font-size: 14px; line-height: 1.7;
+      margin-bottom: 28px; flex: 1;
+    }
+    .card-chips {
+      display: flex; flex-wrap: wrap; gap: 7px;
+      margin-bottom: 24px;
+    }
+    .card-chip {
+      font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 10px;
+    }
+    .card-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 800;
+      padding: 10px 22px; border-radius: 30px;
+      width: fit-content;
+      transition: gap .2s;
+    }
+    .card:hover .card-cta { gap: 12px; }
+
+    /* Card A — 紫红暗色 */
+    .card-a {
+      background: linear-gradient(135deg, #0d0d1a 0%, #1a0d2e 60%, #2a0d1a 100%);
+      border: 1px solid rgba(255,48,96,.2);
+      box-shadow: 0 4px 40px rgba(255,48,96,.08);
+    }
+    .card-a:hover { box-shadow: 0 12px 60px rgba(255,48,96,.18); }
+    .card-a .card-tag { background: rgba(255,48,96,.15); color: #ff6090; }
+    .card-a .card-desc { color: rgba(255,255,255,.5); }
+    .card-a .card-chip { background: rgba(255,48,96,.12); color: #ff9090; }
+    .card-a .card-cta { background: #ff3060; color: #fff; }
+    .card-a .card-accent {
+      position: absolute; top: -60px; right: -60px;
+      width: 240px; height: 240px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,48,96,.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Card B — 深蓝金色 */
+    .card-b {
+      background: linear-gradient(135deg, #0a0d1a 0%, #0d1a2e 60%, #1a1a0a 100%);
+      border: 1px solid rgba(255,180,40,.2);
+      box-shadow: 0 4px 40px rgba(255,180,40,.06);
+    }
+    .card-b:hover { box-shadow: 0 12px 60px rgba(255,180,40,.14); }
+    .card-b .card-tag { background: rgba(255,180,40,.15); color: #ffd060; }
+    .card-b .card-desc { color: rgba(255,255,255,.5); }
+    .card-b .card-chip { background: rgba(255,180,40,.12); color: #ffd090; }
+    .card-b .card-cta { background: #c09010; color: #fff; }
+    .card-b .card-accent {
+      position: absolute; top: -60px; right: -60px;
+      width: 240px; height: 240px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,180,40,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Card C — 深绿 */
+    .card-c {
+      background: linear-gradient(135deg, #0a1a0a 0%, #0a2e1a 60%, #0d1a0a 100%);
+      border: 1px solid rgba(40,180,80,.2);
+      box-shadow: 0 4px 40px rgba(40,180,80,.06);
+    }
+    .card-c:hover { box-shadow: 0 12px 60px rgba(40,180,80,.14); }
+    .card-c .card-tag { background: rgba(40,180,80,.15); color: #60e090; }
+    .card-c .card-desc { color: rgba(255,255,255,.5); }
+    .card-c .card-chip { background: rgba(40,180,80,.12); color: #80e0a0; }
+    .card-c .card-cta { background: #1a8a4a; color: #fff; }
+    .card-c .card-accent {
+      position: absolute; top: -60px; right: -60px;
+      width: 240px; height: 240px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(40,180,80,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Card Beer — 深琥珀 */
+    .card-beer {
+      background: linear-gradient(135deg, #1a0a00 0%, #2e1400 60%, #1a0d00 100%);
+      border: 1px solid rgba(255,140,20,.2);
+      box-shadow: 0 4px 40px rgba(255,140,20,.06);
+    }
+    .card-beer:hover { box-shadow: 0 12px 60px rgba(255,140,20,.16); }
+    .card-beer .card-tag { background: rgba(255,140,20,.15); color: #ffb060; }
+    .card-beer .card-desc { color: rgba(255,255,255,.5); }
+    .card-beer .card-chip { background: rgba(255,140,20,.12); color: #ffca80; }
+    .card-beer .card-cta { background: #c06000; color: #fff; }
+    .card-beer .card-accent {
+      position: absolute; top: -60px; right: -60px;
+      width: 240px; height: 240px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,140,20,.14) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 32px 64px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      font-size: 12px; color: rgba(255,255,255,.25);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Brand<span>MKT</span></div>
+  <div class="nav-links">
+    <a class="nav-link" href="solution-a-steps.html">Solution A</a>
+    <a class="nav-link" href="solution-b-steps.html">Solution B</a>
+    <a class="nav-link" href="solution-c-steps.html">Solution C</a>
+    <a class="nav-link" href="beer-dashboard.html">Beer Dashboard</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Brand Marketing Solutions Hub</div>
+  <h1>让每一分<em>品牌预算</em><br>都有数据说话</h1>
+  <p class="hero-sub">三套差异化品牌营销解决方案，覆盖从品牌心智度量到年轻化转型的完整路径，配套行业数据看板。</p>
+  <div class="hero-tags">
+    <span class="hero-tag">国际成熟品牌</span>
+    <span class="hero-tag">快消 / 酒水 / 母婴 / 大健康</span>
+    <span class="hero-tag">白牌 / 新兴品牌</span>
+    <span class="hero-tag">品牌心智度量</span>
+    <span class="hero-tag">年轻化转型</span>
+  </div>
+</div>
+
+<!-- CARDS -->
+<div class="cards-section">
+  <div class="cards-grid">
+
+    <!-- Solution A -->
+    <a class="card card-a" href="solution-a-steps.html">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <span class="card-tag">Solution A · 国际成熟品牌</span>
+        <h2>小红书品牌心智<br>度量体系</h2>
+        <p class="card-desc">以 Kantar/Nielsen/Ipsos brand health tracking 为蓝本，用小红书 UGC + AI 构建实时品牌心智度量体系——从诊断到 Brand Lift 到销售归因，首次打通品牌心智到生意的完整链路。</p>
+        <div class="card-chips">
+          <span class="card-chip">品牌心智诊断</span>
+          <span class="card-chip">实时 Brand Lift</span>
+          <span class="card-chip">Sponsorship ROI</span>
+          <span class="card-chip">销售归因</span>
+        </div>
+        <span class="card-cta">查看方案 →</span>
+      </div>
+    </a>
+
+    <!-- Solution B -->
+    <a class="card card-b" href="solution-b-steps.html">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <span class="card-tag">Solution B · 国民品牌焕新</span>
+        <h2>国民品牌焕新引擎<br>央视 / 卫视联合 IP</h2>
+        <p class="card-desc">以央视/卫视权威 IP 为背书，以小红书社区为承接阵地，用三种能力帮品牌完成年轻化软着陆——流量承接、双向共振、年轻化效果度量。</p>
+        <div class="card-chips">
+          <span class="card-chip">央视 / 卫视 IP</span>
+          <span class="card-chip">UGC 二次传播</span>
+          <span class="card-chip">双向互动共振</span>
+          <span class="card-chip">灵犀度量</span>
+        </div>
+        <span class="card-cta">查看方案 →</span>
+      </div>
+    </a>
+
+    <!-- Solution C -->
+    <a class="card card-c" href="solution-c-steps.html">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <span class="card-tag">Solution C · 白牌 / 新兴品牌</span>
+        <h2>Red Brand Studio<br>一站式升级解决方案</h2>
+        <p class="card-desc">品牌诊断 × 视觉语言体系重建 × 内容落地 × 效果验证——第一次让品牌预算真正可度量，帮年销 1 亿+ 的新兴品牌完成从"有流量"到"有品牌"的跃迁。</p>
+        <div class="card-chips">
+          <span class="card-chip">灵犀品牌诊断</span>
+          <span class="card-chip">Red Partners 共创</span>
+          <span class="card-chip">KFS & IP 落地</span>
+          <span class="card-chip">成效可度量</span>
+        </div>
+        <span class="card-cta">查看方案 →</span>
+      </div>
+    </a>
+
+    <!-- Beer Dashboard -->
+    <a class="card card-beer" href="beer-dashboard.html">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <span class="card-tag">Data Dashboard · 啤酒行业</span>
+        <h2>啤酒行业<br>小红书数据看板</h2>
+        <p class="card-desc">啤酒行业品牌在小红书的核心数据洞察——品牌声量、人群画像、内容趋势、竞品对比，为品牌营销决策提供实时数据支撑。</p>
+        <div class="card-chips">
+          <span class="card-chip">品牌声量对比</span>
+          <span class="card-chip">人群画像</span>
+          <span class="card-chip">内容趋势</span>
+          <span class="card-chip">竞品 Benchmark</span>
+        </div>
+        <span class="card-cta">查看看板 →</span>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<footer>Brand Marketing Solutions Hub · Powered by 小红书灵犀</footer>
+
+</body>
+</html>
