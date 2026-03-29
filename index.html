@@ -466,39 +466,106 @@
     </div>
   </div>
 
-  <!-- 数据示意 -->
-  <div class="chart-row">
-    <div class="mini-chart">
-      <div class="mc-title">第2年 GMV 增速：品牌建设 vs 纯产品销售</div>
-      <div class="mc-compare">
-        <div class="mc-row">
-          <span class="mc-label">品牌建设组</span>
-          <div class="mc-bar-wrap"><div class="mc-bar bar-brand" style="width:80%"></div></div>
-          <span class="mc-val val-up">+12%</span>
-        </div>
-        <div class="mc-row">
-          <span class="mc-label">纯产品销售</span>
-          <div class="mc-bar-wrap"><div class="mc-bar bar-perf" style="width:95%"></div></div>
-          <span class="mc-val val-up">+31%</span>
-        </div>
+  <!-- 数据示意：SVG线图 + 数据面板 -->
+  <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:28px 32px;margin-top:0;">
+
+    <!-- 标题 -->
+    <div style="font-size:13px;font-weight:800;color:rgba(255,255,255,.5);margin-bottom:20px;letter-spacing:.5px;">品效一体 vs 纯效果：第2年数据对比</div>
+
+    <div style="display:grid;grid-template-columns:1.6fr 1fr;gap:32px;align-items:center;">
+
+      <!-- GMV 趋势线图 SVG -->
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.35);margin-bottom:10px;letter-spacing:1px;text-transform:uppercase;">GMV Growth Rate</div>
+        <svg viewBox="0 0 520 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+          <!-- 背景网格 -->
+          <line x1="0" y1="90" x2="520" y2="90" stroke="rgba(255,255,255,.06)" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="0" y1="40" x2="520" y2="40" stroke="rgba(255,255,255,.04)" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="0" y1="140" x2="520" y2="140" stroke="rgba(255,255,255,.04)" stroke-width="1" stroke-dasharray="4,4"/>
+
+          <!-- 年份分割线 -->
+          <line x1="173" y1="10" x2="173" y2="170" stroke="rgba(255,255,255,.1)" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="346" y1="10" x2="346" y2="170" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/>
+
+          <!-- 年份标签 -->
+          <text x="86" y="175" fill="rgba(255,255,255,.3)" font-size="10" text-anchor="middle">1st Year</text>
+          <text x="259" y="175" fill="rgba(255,255,255,.3)" font-size="10" text-anchor="middle">1st Year</text>
+          <text x="433" y="175" fill="rgba(255,255,255,.55)" font-size="11" text-anchor="middle" font-weight="700">2nd Year</text>
+          <!-- 2nd year highlight box -->
+          <rect x="346" y="8" width="174" height="158" fill="rgba(255,255,255,.03)" rx="4"/>
+
+          <!-- Brand Building line (pink) - GMV stays up -->
+          <path d="M 0,80 C 30,78 60,76 86,72 C 120,67 150,64 173,62 C 210,59 240,57 260,55 C 290,53 320,52 346,52 C 380,51 420,50 520,48"
+            fill="none" stroke="#ff3060" stroke-width="2.5" stroke-linecap="round"/>
+
+          <!-- Product Selling line (cyan) - GMV declining -->
+          <path d="M 0,80 C 30,82 60,86 86,90 C 120,96 150,102 173,108 C 210,115 240,120 260,124 C 290,128 320,131 346,133 C 380,135 420,137 520,140"
+            fill="none" stroke="#00c8c8" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="0"/>
+
+          <!-- 端点标签 -->
+          <circle cx="510" cy="48" r="4" fill="#ff3060"/>
+          <text x="480" y="38" fill="#ff3060" font-size="11" font-weight="700" text-anchor="middle">Brand building ↑</text>
+
+          <circle cx="510" cy="140" r="4" fill="#00c8c8"/>
+          <text x="480" y="158" fill="#00c8c8" font-size="11" font-weight="700" text-anchor="middle">Product selling ↓</text>
+
+          <!-- Y轴标签 -->
+          <text x="6" y="13" fill="rgba(255,255,255,.3)" font-size="9">GMV</text>
+          <text x="6" y="23" fill="rgba(255,255,255,.3)" font-size="9">Growth</text>
+          <text x="6" y="33" fill="rgba(255,255,255,.3)" font-size="9">Rate</text>
+        </svg>
       </div>
-      <div style="font-size:11px;color:rgba(255,255,255,.25);margin-top:10px;">↑ GMV 增速，第2年</div>
-    </div>
-    <div class="mini-chart">
-      <div class="mc-title">第2年 CPA 变化：品牌建设 vs 纯产品销售</div>
-      <div class="mc-compare">
-        <div class="mc-row">
-          <span class="mc-label">品牌建设组</span>
-          <div class="mc-bar-wrap"><div class="mc-bar bar-brand" style="width:35%"></div></div>
-          <span class="mc-val" style="color:#40c060;">-61%</span>
+
+      <!-- 数据面板：CPM + CPA -->
+      <div style="display:flex;flex-direction:column;gap:16px;">
+
+        <!-- CPM panel -->
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px 18px;">
+          <div style="font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:12px;">CPM vs 1st Year</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="width:10px;height:10px;border-radius:50%;background:#ff3060;flex-shrink:0;"></div>
+                <span style="font-size:12px;color:rgba(255,255,255,.6);">Brand building</span>
+              </div>
+              <span style="font-size:18px;font-weight:900;color:#ff9090;">+12%</span>
+            </div>
+            <div style="height:1px;background:rgba(255,255,255,.06);"></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="width:10px;height:10px;border-radius:50%;background:#00c8c8;flex-shrink:0;"></div>
+                <span style="font-size:12px;color:rgba(255,255,255,.6);">Product selling</span>
+              </div>
+              <span style="font-size:18px;font-weight:900;color:#00c8c8;">+31%</span>
+            </div>
+          </div>
         </div>
-        <div class="mc-row">
-          <span class="mc-label">纯产品销售</span>
-          <div class="mc-bar-wrap"><div class="mc-bar bar-perf" style="width:65%"></div></div>
-          <span class="mc-val" style="color:#ff6060;">-30%</span>
+
+        <!-- CPA panel -->
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px 18px;">
+          <div style="font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:12px;">CPA vs 1st Year</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="width:10px;height:10px;border-radius:50%;background:#ff3060;flex-shrink:0;"></div>
+                <span style="font-size:12px;color:rgba(255,255,255,.6);">Brand building</span>
+              </div>
+              <span style="font-size:18px;font-weight:900;color:#40c060;">-61%</span>
+            </div>
+            <div style="height:1px;background:rgba(255,255,255,.06);"></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="width:10px;height:10px;border-radius:50%;background:#00c8c8;flex-shrink:0;"></div>
+                <span style="font-size:12px;color:rgba(255,255,255,.6);">Product selling</span>
+              </div>
+              <span style="font-size:18px;font-weight:900;color:#80d0a0;">-30%</span>
+            </div>
+          </div>
         </div>
+
+        <div style="font-size:11px;color:rgba(255,255,255,.25);line-height:1.5;text-align:center;">品效一体品牌：CPM涨幅更小，CPA降幅更大</div>
       </div>
-      <div style="font-size:11px;color:rgba(255,255,255,.25);margin-top:10px;">↓ CPA 降幅，第2年（品牌建设 CPA 降幅更大）</div>
+
     </div>
   </div>
 
