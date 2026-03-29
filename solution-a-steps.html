@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>小红书品牌心智度量体系 — Solution A</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      background: #0d0d14;
+      color: #fff;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #0d0d14 0%, #1a0d2e 50%, #2a0d1a 100%);
+      padding: 64px 64px 56px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .hero::before {
+      content: "";
+      position: absolute; top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 400px;
+      background: radial-gradient(ellipse, rgba(180,40,255,.14) 0%, transparent 70%);
+    }
+    .hero::after {
+      content: "";
+      position: absolute; bottom: -80px; right: -60px;
+      width: 360px; height: 360px;
+      background: radial-gradient(circle, rgba(255,40,80,.10) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 40px;
+      padding: 6px 20px;
+      font-size: 11px; font-weight: 800; letter-spacing: 2px;
+      text-transform: uppercase; color: #ff6090;
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: 52px; font-weight: 900; line-height: 1.15;
+      letter-spacing: -1.5px; margin-bottom: 20px;
+    }
+    .hero h1 span { color: #ff3060; }
+    .hero-flow {
+      font-size: 15px; color: rgba(255,255,255,.45);
+      line-height: 1.7; margin-bottom: 0;
+      letter-spacing: .3px;
+    }
+    .hero-flow strong { color: rgba(255,255,255,.75); }
+
+    /* ── SECTION ── */
+    .section {
+      padding: 52px 64px;
+    }
+    .section-label {
+      font-size: 11px; font-weight: 800; letter-spacing: 2.5px;
+      text-transform: uppercase; color: #ff3060;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: 26px; font-weight: 900; color: #fff;
+      line-height: 1.25; margin-bottom: 8px;
+    }
+    .section-sub {
+      font-size: 15px; color: rgba(255,255,255,.5);
+      line-height: 1.7; margin-bottom: 36px; max-width: 680px;
+    }
+
+    /* ── TARGET CUSTOMER ── */
+    .target-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 20px;
+      padding: 36px 40px;
+      display: flex; gap: 48px; align-items: center; flex-wrap: wrap;
+    }
+    .target-desc { flex: 1; min-width: 260px; }
+    .target-desc h3 {
+      font-size: 20px; font-weight: 900; color: #fff;
+      line-height: 1.35; margin-bottom: 14px;
+    }
+    .target-desc p { font-size: 15px; color: rgba(255,255,255,.55); line-height: 1.75; }
+    .target-logos {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px;
+    }
+    .target-logo {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      color: rgba(255,255,255,.75);
+      font-size: 13px; font-weight: 700;
+      padding: 6px 16px; border-radius: 20px;
+    }
+    .target-right {
+      display: flex; flex-direction: column; gap: 18px; min-width: 240px;
+    }
+    .t-metric {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .t-metric-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: rgba(255,48,96,.15);
+      border: 1px solid rgba(255,48,96,.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .t-metric-text .big { font-size: 15px; font-weight: 800; color: #fff; line-height: 1.3; }
+    .t-metric-text .small { font-size: 12px; color: rgba(255,255,255,.4); margin-top: 2px; }
+
+    /* ── PAIN POINTS ── */
+    .pain-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+    }
+    .pain-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 18px;
+      padding: 26px 24px 22px;
+      position: relative; overflow: hidden;
+    }
+    .pain-card::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .pain-card.p1::before { background: linear-gradient(90deg, #ff3060, #ff6090); }
+    .pain-card.p2::before { background: linear-gradient(90deg, #9b30d0, #c060ff); }
+    .pain-card.p3::before { background: linear-gradient(90deg, #1a6fd4, #60a0ff); }
+    .pain-icon { font-size: 30px; margin-bottom: 14px; display: block; }
+    .pain-num {
+      font-size: 10px; font-weight: 800; letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+    .p1 .pain-num { color: #ff6090; }
+    .p2 .pain-num { color: #c060ff; }
+    .p3 .pain-num { color: #60a0ff; }
+    .pain-card h4 {
+      font-size: 15px; font-weight: 900; color: #fff;
+      line-height: 1.35; margin-bottom: 10px;
+    }
+    .pain-card p { font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.7; }
+    .pain-quote {
+      margin-top: 14px;
+      padding: 8px 12px;
+      border-radius: 0 6px 6px 0;
+      font-size: 12px; line-height: 1.6; font-style: italic;
+      border-left: 3px solid;
+    }
+    .p1 .pain-quote { border-color: #ff3060; background: rgba(255,48,96,.08); color: #ff9090; }
+    .p2 .pain-quote { border-color: #9b30d0; background: rgba(155,48,208,.08); color: #c090ff; }
+    .p3 .pain-quote { border-color: #1a6fd4; background: rgba(26,111,212,.08); color: #90c0ff; }
+
+    /* ── 6-STEP FLOW ── */
+    .flow-timeline {
+      position: relative;
+      display: flex; gap: 0;
+      margin-bottom: 0;
+      overflow-x: auto;
+    }
+    /* connector line */
+    .flow-timeline::before {
+      content: "";
+      position: absolute;
+      top: 36px; left: 56px; right: 56px; height: 2px;
+      background: linear-gradient(90deg,
+        #9b30d0, #4a60d0, #1a8a6a, #c09010, #d04020, #8a1020);
+      z-index: 0;
+    }
+    .flow-step {
+      flex: 1; min-width: 180px;
+      display: flex; flex-direction: column; align-items: center;
+      position: relative; z-index: 1;
+      padding: 0 8px;
+    }
+    .flow-dot {
+      width: 72px; height: 72px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      margin-bottom: 20px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .flow-dot .dot-num {
+      position: absolute; top: -6px; right: -6px;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: #fff; color: #0d0d14;
+      font-size: 10px; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .s0 .flow-dot { background: radial-gradient(135deg, #6030b0, #9b30d0); box-shadow: 0 0 20px rgba(155,48,208,.4); }
+    .s1 .flow-dot { background: radial-gradient(135deg, #2040a0, #4a60d0); box-shadow: 0 0 20px rgba(74,96,208,.4); }
+    .s2 .flow-dot { background: radial-gradient(135deg, #0a6040, #1a8a6a); box-shadow: 0 0 20px rgba(26,138,106,.4); }
+    .s3 .flow-dot { background: radial-gradient(135deg, #806010, #c09010); box-shadow: 0 0 20px rgba(192,144,16,.4); }
+    .s4 .flow-dot { background: radial-gradient(135deg, #902010, #d04020); box-shadow: 0 0 20px rgba(208,64,32,.4); }
+    .s5 .flow-dot { background: radial-gradient(135deg, #5a0a10, #8a1020); box-shadow: 0 0 20px rgba(138,16,32,.4); }
+
+    .flow-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px;
+      padding: 20px 18px 18px;
+      width: 100%;
+    }
+    .flow-tag {
+      display: inline-block;
+      font-size: 9px; font-weight: 900; letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 3px 10px; border-radius: 20px;
+      margin-bottom: 10px;
+    }
+    .s0 .flow-tag { background: rgba(155,48,208,.25); color: #c090ff; }
+    .s1 .flow-tag { background: rgba(74,96,208,.25); color: #90b0ff; }
+    .s2 .flow-tag { background: rgba(26,138,106,.25); color: #60d0a0; }
+    .s3 .flow-tag { background: rgba(192,144,16,.25); color: #e0b040; }
+    .s4 .flow-tag { background: rgba(208,64,32,.25); color: #ff9060; }
+    .s5 .flow-tag { background: rgba(138,16,32,.25); color: #ff7070; }
+
+    .flow-card h4 {
+      font-size: 14px; font-weight: 900; color: #fff;
+      line-height: 1.35; margin-bottom: 8px;
+    }
+    .flow-card p {
+      font-size: 12px; color: rgba(255,255,255,.5); line-height: 1.65;
+      margin-bottom: 12px;
+    }
+    .flow-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+    .flow-chip {
+      font-size: 10px; color: rgba(255,255,255,.6);
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 2px 8px; border-radius: 10px;
+    }
+    .flow-star {
+      font-size: 11px; font-weight: 700;
+      padding: 5px 10px; border-radius: 8px;
+      display: inline-block; margin-top: 4px;
+    }
+    .s0 .flow-star { background: rgba(155,48,208,.2); color: #c090ff; }
+    .s1 .flow-star { background: rgba(74,96,208,.2); color: #90b0ff; }
+    .s2 .flow-star { background: rgba(26,138,106,.2); color: #60d0a0; }
+    .s3 .flow-star { background: rgba(192,144,16,.2); color: #e0b040; }
+    .s4 .flow-star { background: rgba(208,64,32,.2); color: #ff9060; }
+    .s5 .flow-star { background: rgba(138,16,32,.2); color: #ff7070; }
+
+    /* ── BOTTOM CTA ── */
+    .bottom-cta {
+      background: linear-gradient(135deg, #0d0d14 0%, #1a0d2e 55%, #2a0d1a 100%);
+      padding: 60px 64px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .bottom-cta h2 {
+      font-size: 32px; font-weight: 900; line-height: 1.3;
+      margin-bottom: 16px;
+    }
+    .bottom-cta h2 span { color: #ff3060; }
+    .bottom-cta p {
+      font-size: 15px; color: rgba(255,255,255,.45);
+      line-height: 1.75; max-width: 600px; margin: 0 auto 32px;
+    }
+    .cta-pills {
+      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+    }
+    .cta-pill {
+      background: rgba(255,48,96,.12);
+      border: 1px solid rgba(255,48,96,.35);
+      color: #ff9090;
+      padding: 8px 22px; border-radius: 30px;
+      font-size: 13px; font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="hero-badge">✦ Solution A &nbsp;·&nbsp; 国际成熟品牌</div>
+  <h1>让每一分品牌预算<br><span>都有数据说话</span></h1>
+  <p class="hero-flow">
+    以 Kantar / Nielsen / Ipsos brand health tracking 为蓝本<br>
+    用小红书海量 UGC + AI 构建实时品牌形象度量体系<br>
+    <strong>从品牌心智诊断 → 实时 Brand Lift → 一方销售归因，首次打通品牌心智到销售的完整链路</strong>
+  </p>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px;">
+    <span style="background:rgba(255,48,96,.15);border:1px solid rgba(255,48,96,.4);color:#ff9090;padding:8px 22px;border-radius:30px;font-size:13px;font-weight:700;">🔍 UGC 替代传统调研</span>
+    <span style="background:rgba(255,48,96,.15);border:1px solid rgba(255,48,96,.4);color:#ff9090;padding:8px 22px;border-radius:30px;font-size:13px;font-weight:700;">📊 实时 Brand Lift</span>
+    <span style="background:rgba(255,48,96,.15);border:1px solid rgba(255,48,96,.4);color:#ff9090;padding:8px 22px;border-radius:30px;font-size:13px;font-weight:700;">🏟️ Sponsorship ROI 归因</span>
+    <span style="background:rgba(255,48,96,.15);border:1px solid rgba(255,48,96,.4);color:#ff9090;padding:8px 22px;border-radius:30px;font-size:13px;font-weight:700;">💰 心智 → 销售完整闭环</span>
+  </div>
+</div>
+
+<!-- ══ TARGET CUSTOMER ══ -->
+<div class="section" style="border-bottom:1px solid rgba(255,255,255,.07);">
+  <div class="section-label">目标客户</div>
+  <div class="section-title">谁最需要这套度量体系？</div>
+  <div class="section-sub">每年在线上线下投入大量品牌广告，但始终缺一套标准化、实时的品牌效果度量体系的国际成熟品牌。</div>
+  <div class="target-card">
+    <div class="target-desc">
+      <h3>年预算千万级以上的<br>国际成熟品牌</h3>
+      <p>社媒大曝光、赞助赛事/音乐节/极限运动等线下活动投入大量资源，但每次 campaign 结束后，只能等 Kantar 季度报告——贵、慢、小样本，无法实时优化。</p>
+      <div class="target-logos">
+        <span class="target-logo">百威 Budweiser</span>
+        <span class="target-logo">喜力 Heineken</span>
+        <span class="target-logo">宝洁 P&G</span>
+        <span class="target-logo">联合利华 Unilever</span>
+        <span class="target-logo">耐克 Nike</span>
+        <span class="target-logo">阿迪达斯 Adidas</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ PAIN POINTS ══ -->
+<div class="section" style="border-bottom:1px solid rgba(255,255,255,.07);">
+  <div class="section-label">客户痛点</div>
+  <div class="section-title">三个让品牌预算无法闭环的盲区</div>
+  <div class="section-sub">不是预算不够，也不是执行不力——是始终缺一套标准化、实时、可归因的品牌效果度量体系。</div>
+  <div class="pain-grid">
+
+    <div class="pain-card p1">
+      <span class="pain-icon">🏟️</span>
+      <div class="pain-num">痛点 01 · Sponsorship 盲区</div>
+      <h4>投了赞助，不知道哪场真正打动了目标人群</h4>
+      <p>赛事/音乐节/极限运动赞助覆盖大，但无法追踪哪个兴趣点真正影响了品牌心智，哪场赞助驱动了实际销售——Sponsorship ROI 永远是黑盒。</p>
+      <div class="pain-quote">「我们赞助了三个音乐节，哪个对品牌贡献最大？」</div>
+    </div>
+
+    <div class="pain-card p2">
+      <span class="pain-icon">📊</span>
+      <div class="pain-num">痛点 02 · Brand Equity 量化缺失</div>
+      <h4>品牌广告打完，只知道人群资产涨了</h4>
+      <p>投了小红书/抖音/B站 IP 品牌广告，平台数据只能告诉你曝光量和人群资产变化，但对 brand equity / brand imagery 的影响没有办法被实时数据量化。</p>
+      <div class="pain-quote">「人群资产涨了 20%，但品牌形象有没有变好？」</div>
+    </div>
+
+    <div class="pain-card p3">
+      <span class="pain-icon">⏳</span>
+      <div class="pain-num">痛点 03 · 度量工具的根本缺陷</div>
+      <h4>只能等 Kantar 季度报告——贵、慢、小样本</h4>
+      <p>传统 brand tracking 工具（Kantar/Nielsen/Ipsos）费用高昂、交付周期 8–12 周、样本量有限，campaign 执行中无法获得实时反馈，更无法做出即时优化。</p>
+      <div class="pain-quote">「Campaign 都结束三个月了，报告才出来。」</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ 6-STEP SOLUTION ══ -->
+<div class="section">
+  <div class="section-label">Solution 核心价值</div>
+  <div class="section-title">六步品牌心智度量闭环</div>
+  <div class="section-sub">以 Kantar/Nielsen/Ipsos brand health tracking 为蓝本，用小红书海量 UGC + AI 替代传统调研——更快、样本量更大、成本更低，且首次实现品牌心智到销售的完整归因链路。</div>
+
+  <div class="flow-timeline">
+
+    <div class="flow-step s0">
+      <div class="flow-dot">🔍<span class="dot-num">00</span></div>
+      <div class="flow-card">
+        <span class="flow-tag">Research</span>
+        <h4>收集主流 Research Firm 的 Attribute 体系</h4>
+        <p>整合 Kantar、Nielsen、Ipsos 等机构的 brand attributes 标准框架，建立三维属性词库（功能 / 情绪 / 兴趣）。</p>
+        <div class="flow-chips">
+          <span class="flow-chip">Kantar BrandZ</span>
+          <span class="flow-chip">Nielsen</span>
+          <span class="flow-chip">Ipsos</span>
+          <span class="flow-chip">Millward Brown</span>
+        </div>
+        <span class="flow-star">★ UGC 大样本覆盖调研盲区</span>
+      </div>
+    </div>
+
+    <div class="flow-step s1">
+      <div class="flow-dot">✅<span class="dot-num">01</span></div>
+      <div class="flow-card">
+        <span class="flow-tag">Validate</span>
+        <h4>用一方数据验证行业重要 Attributes</h4>
+        <p>一方销售数据 × UGC 打标，验证哪些 attributes 真正影响消费决策，保留高 ROI attribute 清单，去掉"看起来重要但不转化"的属性。</p>
+        <div class="flow-chips">
+          <span class="flow-chip">UGC 内容打标</span>
+          <span class="flow-chip">Attribute 重要性排序</span>
+        </div>
+        <span class="flow-star">★ 替代 6–8 周传统调研</span>
+      </div>
+    </div>
+
+    <div class="flow-step s2">
+      <div class="flow-dot">🩺<span class="dot-num">02</span></div>
+      <div class="flow-card">
+        <span class="flow-tag">Diagnose</span>
+        <h4>诊断品牌 Attribute 占有率 vs 竞品</h4>
+        <p>通过 XHS 站内 UGC 分析品牌在每个 attribute 的 Share of Voice，找出优势位、缺失位、可进攻的白地。</p>
+        <div class="flow-chips">
+          <span class="flow-chip">Attribute SOV</span>
+          <span class="flow-chip">竞品对比</span>
+          <span class="flow-chip">白地识别</span>
+        </div>
+        <span class="flow-star">★ 实时竞品心智地图</span>
+      </div>
+    </div>
+
+    <div class="flow-step s3">
+      <div class="flow-dot">🎯<span class="dot-num">03</span></div>
+      <div class="flow-card">
+        <span class="flow-tag">Occupy</span>
+        <h4>圈定目标 Brand Attributes，精准内容投放</h4>
+        <p>基于诊断结果，确定品牌要主攻的 attributes，在 XHS 站内对应场景做内容种草投放。</p>
+        <div class="flow-chips">
+          <span class="flow-chip">功能性</span>
+          <span class="flow-chip">情绪性</span>
+          <span class="flow-chip">兴趣</span>
+          <span class="flow-chip">达人矩阵</span>
+          <span class="flow-chip">场景化种草</span>
+          <span class="flow-chip">Sponsorship 线上延伸</span>
+        </div>
+        <span class="flow-star">★ 线下 IP → XHS UGC 放大</span>
+      </div>
+    </div>
+
+    <div class="flow-step s4">
+      <div class="flow-dot">📈<span class="dot-num">04</span></div>
+      <div class="flow-card">
+        <span class="flow-tag">Measure</span>
+        <h4>实时度量 Brand Lift</h4>
+        <p>投放前后追踪 attribute SOV 变化与情感倾向，输出品牌心智提升报告——更快、样本量更大、成本更低。</p>
+        <div class="flow-chips">
+          <span class="flow-chip">SOV 变化追踪</span>
+          <span class="flow-chip">情感倾向</span>
+          <span class="flow-chip">竞品 Benchmark</span>
+        </div>
+        <span class="flow-star">★ 实时替代 Kantar 季度调研</span>
+      </div>
+    </div>
+
+    <div class="flow-step s5">
+      <div class="flow-dot">💰<span class="dot-num">05</span></div>
+      <div class="flow-card">
+        <span class="flow-tag">Attribute</span>
+        <h4>终端销售归因 — 哪个 Attribute 驱动购买</h4>
+        <p>接入品牌一方销售数据，构建心智 → 销售归因模型。回答 CMO 核心问题：哪个 Sponsorship ROI 最高？明年预算怎么分？</p>
+        <div class="flow-chips">
+          <span class="flow-chip">一方数据回传</span>
+          <span class="flow-chip">Attribute → 销售路径</span>
+          <span class="flow-chip">Sponsorship ROI 排序</span>
+        </div>
+        <span class="flow-star">★ 首个心智 → 销售归因产品</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ BOTTOM CTA ══ -->
+<div class="bottom-cta">
+  <h2>小红书<span>品牌心智</span>度量体系</h2>
+  <p>以 Kantar/Nielsen/Ipsos brand health tracking 为蓝本，用小红书 UGC + AI 构建实时度量体系——更快、更大样本、更低成本，首次打通品牌心智到销售的完整链路。</p>
+  <div class="cta-pills">
+    <span class="cta-pill">🔍 UGC 替代传统调研</span>
+    <span class="cta-pill">📊 实时 Brand Lift</span>
+    <span class="cta-pill">🏟️ Sponsorship ROI 归因</span>
+    <span class="cta-pill">💰 心智 → 销售完整闭环</span>
+  </div>
+</div>
+
+</body>
+</html>
