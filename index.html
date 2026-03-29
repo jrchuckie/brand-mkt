@@ -6,225 +6,206 @@
   <title>Brand Marketing Solutions Hub</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: "PingFang SC", "Helvetica Neue", Arial, sans-serif;
-      background: #0d0d14;
-      color: #fff;
-      min-height: 100vh;
-    }
+    body { font-family: "PingFang SC", "Helvetica Neue", Arial, sans-serif; background: #0d0d14; color: #fff; }
 
-    /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(13,13,20,.85);
-      backdrop-filter: blur(16px);
+      background: rgba(13,13,20,.9); backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(255,255,255,.08);
-      padding: 0 48px;
-      height: 60px;
+      padding: 0 48px; height: 60px;
       display: flex; align-items: center; justify-content: space-between;
     }
-    .nav-logo {
-      font-size: 15px; font-weight: 900; letter-spacing: .5px;
-      color: #fff;
-    }
+    .nav-logo { font-size: 15px; font-weight: 900; color: #fff; text-decoration: none; }
     .nav-logo span { color: #ff3060; }
     .nav-links { display: flex; gap: 8px; }
     .nav-link {
-      font-size: 12px; font-weight: 700;
-      padding: 6px 14px; border-radius: 20px;
-      text-decoration: none; color: rgba(255,255,255,.6);
-      transition: all .2s;
-      border: 1px solid transparent;
+      font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 20px;
+      text-decoration: none; color: rgba(255,255,255,.55); border: 1px solid transparent; transition: all .2s;
     }
-    .nav-link:hover {
-      color: #fff; background: rgba(255,255,255,.08);
-      border-color: rgba(255,255,255,.15);
-    }
+    .nav-link:hover { color: #fff; background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.15); }
+
+    .section { padding: 52px 64px; }
+    .section-label { font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: #ff3060; margin-bottom: 10px; }
+    .section-title { font-size: 28px; font-weight: 900; color: #fff; line-height: 1.25; margin-bottom: 8px; }
+    .section-sub { font-size: 14px; color: rgba(255,255,255,.45); line-height: 1.7; margin-bottom: 36px; max-width: 680px; }
+    .divider { height: 1px; background: rgba(255,255,255,.07); margin: 0 64px; }
 
     /* ── HERO ── */
     .hero {
-      padding: 140px 64px 80px;
-      text-align: center;
-      position: relative; overflow: hidden;
+      padding: 120px 64px 72px; text-align: center; position: relative; overflow: hidden;
     }
     .hero::before {
-      content: "";
-      position: absolute; top: 60px; left: 50%;
-      transform: translateX(-50%);
-      width: 800px; height: 500px;
+      content: ""; position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 400px;
       background: radial-gradient(ellipse, rgba(255,48,96,.10) 0%, transparent 65%);
-      pointer-events: none;
     }
-    .hero-eyebrow {
-      font-size: 11px; font-weight: 800; letter-spacing: 3px;
-      text-transform: uppercase; color: #ff3060;
-      margin-bottom: 20px;
-    }
-    .hero h1 {
-      font-size: 58px; font-weight: 900; line-height: 1.12;
-      letter-spacing: -2px; margin-bottom: 20px;
-    }
+    .hero-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: #ff3060; margin-bottom: 18px; }
+    .hero h1 { font-size: 60px; font-weight: 900; line-height: 1.1; letter-spacing: -2px; margin-bottom: 20px; }
     .hero h1 em { font-style: normal; color: #ff3060; }
-    .hero-sub {
-      font-size: 17px; color: rgba(255,255,255,.5);
-      line-height: 1.7; max-width: 580px; margin: 0 auto 48px;
+    .hero-sub { font-size: 16px; color: rgba(255,255,255,.45); line-height: 1.7; max-width: 560px; margin: 0 auto 48px; }
+
+    /* nav cards row */
+    .nav-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 0; }
+    .nav-card {
+      border-radius: 14px; padding: 18px 16px 16px;
+      text-decoration: none; border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.04);
+      transition: all .2s; display: flex; flex-direction: column; gap: 8px;
     }
-    .hero-tags {
-      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    .nav-card:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); transform: translateY(-2px); }
+    .nav-card .nc-tag { font-size: 9px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
+    .nav-card .nc-title { font-size: 13px; font-weight: 800; color: #fff; line-height: 1.35; }
+    .nav-card .nc-arrow { font-size: 11px; color: rgba(255,255,255,.3); margin-top: auto; }
+    .nc-a .nc-tag { color: #ff6090; } .nc-b .nc-tag { color: #ffd060; } .nc-c .nc-tag { color: #60e090; }
+    .nc-beer .nc-tag { color: #ffb060; } .nc-road .nc-tag { color: #a090ff; }
+
+    /* ── SECTION 1: 三类客户 ── */
+    .client-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .client-card {
+      border-radius: 18px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,.09);
     }
-    .hero-tag {
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
-      color: rgba(255,255,255,.6);
-      font-size: 12px; font-weight: 600;
-      padding: 6px 16px; border-radius: 20px;
+    .client-head {
+      padding: 22px 24px 16px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .client-priority {
+      display: inline-block; font-size: 10px; font-weight: 900;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 20px; margin-bottom: 12px;
+    }
+    .client-card h3 { font-size: 18px; font-weight: 900; color: #fff; line-height: 1.3; margin-bottom: 6px; }
+    .client-card .client-sub { font-size: 12px; color: rgba(255,255,255,.4); margin-bottom: 12px; }
+    .rep-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+    .rep-chip { font-size: 11px; padding: 2px 8px; border-radius: 8px; background: rgba(255,255,255,.07); color: rgba(255,255,255,.55); border: 1px solid rgba(255,255,255,.1); }
+    .client-body { padding: 18px 24px 20px; display: flex; flex-direction: column; gap: 10px; }
+    .client-trait { display: flex; gap: 9px; align-items: flex-start; font-size: 13px; color: rgba(255,255,255,.6); line-height: 1.6; }
+    .trait-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+    .client-foot { padding: 14px 24px; border-top: 1px solid rgba(255,255,255,.07); }
+    .client-pain-label { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+    .client-pain { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.5; }
+
+    /* card A colors */
+    .cc-a { background: linear-gradient(160deg, rgba(255,48,96,.06) 0%, rgba(13,13,20,1) 60%); border-color: rgba(255,48,96,.18); }
+    .cc-a .client-head { background: rgba(255,48,96,.06); }
+    .cc-a .client-priority { background: rgba(255,48,96,.15); color: #ff6090; }
+    .cc-a .trait-dot { background: #ff3060; }
+    .cc-a .client-pain-label { color: #ff6090; }
+    /* card B colors */
+    .cc-b { background: linear-gradient(160deg, rgba(255,180,40,.06) 0%, rgba(13,13,20,1) 60%); border-color: rgba(255,180,40,.18); }
+    .cc-b .client-head { background: rgba(255,180,40,.05); }
+    .cc-b .client-priority { background: rgba(255,180,40,.15); color: #ffd060; }
+    .cc-b .trait-dot { background: #c09010; }
+    .cc-b .client-pain-label { color: #ffd060; }
+    /* card C colors */
+    .cc-c { background: linear-gradient(160deg, rgba(40,180,80,.06) 0%, rgba(13,13,20,1) 60%); border-color: rgba(40,180,80,.18); }
+    .cc-c .client-head { background: rgba(40,180,80,.05); }
+    .cc-c .client-priority { background: rgba(40,180,80,.15); color: #60e090; }
+    .cc-c .trait-dot { background: #1a8a4a; }
+    .cc-c .client-pain-label { color: #60e090; }
+
+    /* ── SECTION 2: 预算去哪了 ── */
+    .budget-table { width: 100%; border-collapse: collapse; border-radius: 16px; overflow: hidden; }
+    .budget-table th {
+      font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+      color: rgba(255,255,255,.35); padding: 12px 16px; text-align: left;
+      background: rgba(255,255,255,.04); border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .budget-table td { padding: 14px 16px; font-size: 13px; color: rgba(255,255,255,.65); border-bottom: 1px solid rgba(255,255,255,.05); vertical-align: top; line-height: 1.5; }
+    .budget-table tr:last-child td { border-bottom: none; }
+    .budget-table tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+    .channel-name { font-size: 13px; font-weight: 800; color: #fff; }
+    .channel-size { font-size: 11px; color: rgba(255,255,255,.35); font-weight: 600; margin-top: 2px; }
+    .cap-good { color: #40c060; font-weight: 700; font-size: 15px; }
+    .cap-mid { color: #e0a000; font-weight: 700; font-size: 15px; }
+    .cap-bad { color: rgba(255,255,255,.2); font-weight: 700; font-size: 15px; }
+    .opp-badge {
+      display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 1px;
+      text-transform: uppercase; padding: 3px 10px; border-radius: 20px;
+      background: rgba(255,48,96,.15); color: #ff6090; border: 1px solid rgba(255,48,96,.25);
     }
 
-    /* ── CARDS GRID ── */
-    .cards-section {
-      padding: 32px 64px 80px;
-    }
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-    .card {
-      border-radius: 20px;
-      overflow: hidden;
-      text-decoration: none;
-      position: relative;
-      display: flex; flex-direction: column;
-      transition: transform .25s, box-shadow .25s;
-      cursor: pointer;
-    }
-    .card:hover {
-      transform: translateY(-6px);
-    }
-    .card-inner {
-      flex: 1;
-      padding: 36px 36px 28px;
-      position: relative; z-index: 1;
-      display: flex; flex-direction: column;
-    }
-    .card-tag {
-      font-size: 10px; font-weight: 900; letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 4px 12px; border-radius: 20px;
-      display: inline-block; margin-bottom: 20px;
-      width: fit-content;
-    }
-    .card h2 {
-      font-size: 24px; font-weight: 900; line-height: 1.25;
-      margin-bottom: 12px; color: #fff;
-    }
-    .card-desc {
-      font-size: 14px; line-height: 1.7;
-      margin-bottom: 28px; flex: 1;
-    }
-    .card-chips {
-      display: flex; flex-wrap: wrap; gap: 7px;
-      margin-bottom: 24px;
-    }
-    .card-chip {
-      font-size: 11px; font-weight: 600;
-      padding: 3px 10px; border-radius: 10px;
-    }
-    .card-cta {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 13px; font-weight: 800;
-      padding: 10px 22px; border-radius: 30px;
-      width: fit-content;
-      transition: gap .2s;
-    }
-    .card:hover .card-cta { gap: 12px; }
+    /* ── SECTION 3: 品牌广告价值 ── */
+    .value-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
 
-    /* Card A — 紫红暗色 */
-    .card-a {
-      background: linear-gradient(135deg, #0d0d1a 0%, #1a0d2e 60%, #2a0d1a 100%);
-      border: 1px solid rgba(255,48,96,.2);
-      box-shadow: 0 4px 40px rgba(255,48,96,.08);
+    /* risk cards */
+    .risk-cards { display: flex; flex-direction: column; gap: 12px; }
+    .risk-card {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px; padding: 18px 20px;
+      display: flex; gap: 14px; align-items: flex-start;
     }
-    .card-a:hover { box-shadow: 0 12px 60px rgba(255,48,96,.18); }
-    .card-a .card-tag { background: rgba(255,48,96,.15); color: #ff6090; }
-    .card-a .card-desc { color: rgba(255,255,255,.5); }
-    .card-a .card-chip { background: rgba(255,48,96,.12); color: #ff9090; }
-    .card-a .card-cta { background: #ff3060; color: #fff; }
-    .card-a .card-accent {
-      position: absolute; top: -60px; right: -60px;
-      width: 240px; height: 240px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,48,96,.15) 0%, transparent 70%);
-      pointer-events: none;
-    }
+    .risk-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+    .risk-title { font-size: 14px; font-weight: 900; color: #fff; margin-bottom: 4px; }
+    .risk-desc { font-size: 12.5px; color: rgba(255,255,255,.5); line-height: 1.65; }
 
-    /* Card B — 深蓝金色 */
-    .card-b {
-      background: linear-gradient(135deg, #0a0d1a 0%, #0d1a2e 60%, #1a1a0a 100%);
-      border: 1px solid rgba(255,180,40,.2);
-      box-shadow: 0 4px 40px rgba(255,180,40,.06);
+    /* brand value funnel */
+    .funnel-wrap {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09);
+      border-radius: 16px; padding: 24px 24px 20px;
     }
-    .card-b:hover { box-shadow: 0 12px 60px rgba(255,180,40,.14); }
-    .card-b .card-tag { background: rgba(255,180,40,.15); color: #ffd060; }
-    .card-b .card-desc { color: rgba(255,255,255,.5); }
-    .card-b .card-chip { background: rgba(255,180,40,.12); color: #ffd090; }
-    .card-b .card-cta { background: #c09010; color: #fff; }
-    .card-b .card-accent {
-      position: absolute; top: -60px; right: -60px;
-      width: 240px; height: 240px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,180,40,.12) 0%, transparent 70%);
-      pointer-events: none;
+    .funnel-title { font-size: 13px; font-weight: 900; color: #fff; margin-bottom: 18px; }
+    .funnel-steps { display: flex; flex-direction: column; gap: 8px; }
+    .funnel-step {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 14px; border-radius: 10px;
     }
+    .funnel-step .fs-num { font-size: 10px; font-weight: 900; width: 20px; text-align: center; flex-shrink: 0; }
+    .funnel-step .fs-label { font-size: 13px; font-weight: 800; flex: 1; }
+    .funnel-step .fs-desc { font-size: 11.5px; color: rgba(255,255,255,.5); flex: 2; line-height: 1.5; }
+    .fs1 { background: rgba(255,48,96,.12); } .fs1 .fs-num,.fs1 .fs-label { color: #ff6090; }
+    .fs2 { background: rgba(255,120,20,.10); } .fs2 .fs-num,.fs2 .fs-label { color: #ff9040; }
+    .fs3 { background: rgba(255,200,20,.08); } .fs3 .fs-num,.fs3 .fs-label { color: #ffc040; }
+    .fs4 { background: rgba(40,180,80,.10); } .fs4 .fs-num,.fs4 .fs-label { color: #40c060; }
+    .fs5 { background: rgba(80,120,255,.12); } .fs5 .fs-num,.fs5 .fs-label { color: #80a0ff; }
 
-    /* Card C — 深绿 */
-    .card-c {
-      background: linear-gradient(135deg, #0a1a0a 0%, #0a2e1a 60%, #0d1a0a 100%);
-      border: 1px solid rgba(40,180,80,.2);
-      box-shadow: 0 4px 40px rgba(40,180,80,.06);
+    /* data chart: brand vs performance */
+    .chart-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;
     }
-    .card-c:hover { box-shadow: 0 12px 60px rgba(40,180,80,.14); }
-    .card-c .card-tag { background: rgba(40,180,80,.15); color: #60e090; }
-    .card-c .card-desc { color: rgba(255,255,255,.5); }
-    .card-c .card-chip { background: rgba(40,180,80,.12); color: #80e0a0; }
-    .card-c .card-cta { background: #1a8a4a; color: #fff; }
-    .card-c .card-accent {
-      position: absolute; top: -60px; right: -60px;
-      width: 240px; height: 240px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(40,180,80,.12) 0%, transparent 70%);
-      pointer-events: none;
+    .mini-chart {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px; padding: 18px 20px;
     }
+    .mc-title { font-size: 12px; font-weight: 800; color: rgba(255,255,255,.5); margin-bottom: 14px; letter-spacing: .5px; }
+    .mc-compare { display: flex; flex-direction: column; gap: 10px; }
+    .mc-row { display: flex; align-items: center; gap: 10px; }
+    .mc-label { font-size: 11px; color: rgba(255,255,255,.5); width: 80px; flex-shrink: 0; }
+    .mc-bar-wrap { flex: 1; height: 10px; background: rgba(255,255,255,.08); border-radius: 6px; overflow: hidden; }
+    .mc-bar { height: 100%; border-radius: 6px; }
+    .mc-val { font-size: 12px; font-weight: 800; width: 48px; text-align: right; flex-shrink: 0; }
+    .bar-brand { background: linear-gradient(90deg, #ff3060, #ff6090); }
+    .bar-perf { background: rgba(255,255,255,.2); }
+    .val-up { color: #ff6090; }
+    .val-down { color: rgba(255,255,255,.3); }
 
-    /* Card Beer — 深琥珀 */
-    .card-beer {
-      background: linear-gradient(135deg, #1a0a00 0%, #2e1400 60%, #1a0d00 100%);
-      border: 1px solid rgba(255,140,20,.2);
-      box-shadow: 0 4px 40px rgba(255,140,20,.06);
+    /* ── SOLUTION CARDS ── */
+    .sol-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .sol-card {
+      border-radius: 16px; padding: 24px; text-decoration: none;
+      border: 1px solid; transition: all .2s; display: flex; flex-direction: column; gap: 12px;
     }
-    .card-beer:hover { box-shadow: 0 12px 60px rgba(255,140,20,.16); }
-    .card-beer .card-tag { background: rgba(255,140,20,.15); color: #ffb060; }
-    .card-beer .card-desc { color: rgba(255,255,255,.5); }
-    .card-beer .card-chip { background: rgba(255,140,20,.12); color: #ffca80; }
-    .card-beer .card-cta { background: #c06000; color: #fff; }
-    .card-beer .card-accent {
-      position: absolute; top: -60px; right: -60px;
-      width: 240px; height: 240px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,140,20,.14) 0%, transparent 70%);
-      pointer-events: none;
-    }
+    .sol-card:hover { transform: translateY(-3px); }
+    .sol-a { background: rgba(255,48,96,.06); border-color: rgba(255,48,96,.2); }
+    .sol-a:hover { box-shadow: 0 8px 32px rgba(255,48,96,.15); }
+    .sol-b { background: rgba(255,180,40,.05); border-color: rgba(255,180,40,.18); }
+    .sol-b:hover { box-shadow: 0 8px 32px rgba(255,180,40,.12); }
+    .sol-c { background: rgba(40,180,80,.05); border-color: rgba(40,180,80,.18); }
+    .sol-c:hover { box-shadow: 0 8px 32px rgba(40,180,80,.12); }
+    .sol-tag { font-size: 9px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
+    .sol-a .sol-tag { color: #ff6090; } .sol-b .sol-tag { color: #ffd060; } .sol-c .sol-tag { color: #60e090; }
+    .sol-card h3 { font-size: 16px; font-weight: 900; color: #fff; line-height: 1.35; }
+    .sol-card p { font-size: 12.5px; color: rgba(255,255,255,.45); line-height: 1.65; flex: 1; }
+    .sol-cta { font-size: 12px; font-weight: 800; color: rgba(255,255,255,.5); }
+    .sol-card:hover .sol-cta { color: #fff; }
 
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 32px 64px;
-      border-top: 1px solid rgba(255,255,255,.06);
-      font-size: 12px; color: rgba(255,255,255,.25);
-    }
+    footer { text-align: center; padding: 32px 64px; border-top: 1px solid rgba(255,255,255,.06); font-size: 12px; color: rgba(255,255,255,.2); }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-logo">Brand<span>MKT</span></div>
+  <a class="nav-logo" href="index.html">Brand<span>MKT</span></a>
   <div class="nav-links">
     <a class="nav-link" href="roadmap.html">Roadmap</a>
     <a class="nav-link" href="solution-a-steps.html">Solution A</a>
@@ -233,117 +214,320 @@
     <a class="nav-link" href="beer-dashboard.html">Beer Dashboard</a>
   </div>
 </nav>
+<div style="height:60px;"></div>
 
-<!-- HERO -->
+<!-- ── HERO ── -->
 <div class="hero">
   <div class="hero-eyebrow">Brand Marketing Solutions Hub</div>
   <h1>让每一分<em>品牌预算</em><br>都有数据说话</h1>
-  <p class="hero-sub">三套差异化品牌营销解决方案，覆盖从品牌心智度量到年轻化转型的完整路径，配套行业数据看板。</p>
-  <div class="hero-tags">
-    <span class="hero-tag">国际成熟品牌</span>
-    <span class="hero-tag">快消 / 酒水 / 母婴 / 大健康</span>
-    <span class="hero-tag">白牌 / 新兴品牌</span>
-    <span class="hero-tag">品牌心智度量</span>
-    <span class="hero-tag">年轻化转型</span>
+  <p class="hero-sub">三套差异化品牌营销解决方案，覆盖从品牌心智度量到年轻化转型的完整路径。</p>
+  <div class="nav-cards">
+    <a class="nav-card nc-road" href="roadmap.html">
+      <span class="nc-tag">Strategy</span>
+      <span class="nc-title">优先级 & 路线图</span>
+      <span class="nc-arrow">→</span>
+    </a>
+    <a class="nav-card nc-a" href="solution-a-steps.html">
+      <span class="nc-tag">Solution A · P0</span>
+      <span class="nc-title">品牌心智度量体系</span>
+      <span class="nc-arrow">→</span>
+    </a>
+    <a class="nav-card nc-b" href="solution-b-steps.html">
+      <span class="nc-tag">Solution B · P1</span>
+      <span class="nc-title">国民品牌焕新引擎</span>
+      <span class="nc-arrow">→</span>
+    </a>
+    <a class="nav-card nc-c" href="solution-c-steps.html">
+      <span class="nc-tag">Solution C · P2</span>
+      <span class="nc-title">Red Brand Studio</span>
+      <span class="nc-arrow">→</span>
+    </a>
+    <a class="nav-card nc-beer" href="beer-dashboard.html">
+      <span class="nc-tag">Dashboard</span>
+      <span class="nc-title">啤酒行业数据看板</span>
+      <span class="nc-arrow">→</span>
+    </a>
   </div>
 </div>
 
-<!-- CARDS -->
-<div class="cards-section">
-  <div class="cards-grid">
+<div class="divider"></div>
 
-    <!-- Roadmap — full width -->
-    <a class="card" href="roadmap.html" style="grid-column:1/-1;background:linear-gradient(135deg,#0d0d14 0%,#1a0a2e 40%,#2a0d1a 100%);border:1px solid rgba(255,48,96,.25);box-shadow:0 4px 40px rgba(255,48,96,.09);flex-direction:row;align-items:center;gap:0;">
-      <div style="position:absolute;top:-60px;right:-60px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,48,96,.12) 0%,transparent 70%);pointer-events:none;"></div>
-      <div class="card-inner" style="flex-direction:row;align-items:center;gap:40px;flex-wrap:wrap;">
-        <div style="flex:1;min-width:260px;">
-          <span class="card-tag" style="background:rgba(255,48,96,.15);color:#ff6090;">Strategy & Roadmap</span>
-          <h2 style="font-size:28px;">Solution 优先级矩阵<br>& 12个月执行路线图</h2>
-          <p class="card-desc" style="color:rgba(255,255,255,.5);margin-bottom:0;">P0→P1→P2 三级优先级拆解 · 六大内部合作方职责边界 · Solution A/B/C 分阶段执行甘特图</p>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px;min-width:200px;">
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <span style="background:rgba(255,48,96,.12);color:#ff9090;font-size:11px;font-weight:700;padding:4px 10px;border-radius:10px;">P0 国际成熟品牌</span>
-            <span style="background:rgba(255,180,40,.12);color:#ffd090;font-size:11px;font-weight:700;padding:4px 10px;border-radius:10px;">P1 有钱国企</span>
-            <span style="background:rgba(40,180,80,.12);color:#80e0a0;font-size:11px;font-weight:700;padding:4px 10px;border-radius:10px;">P2 白牌新兴</span>
-          </div>
-          <span class="card-cta" style="background:#ff3060;color:#fff;">查看路线图 →</span>
+<!-- ══ SECTION 1: 三类客户 ══ -->
+<div class="section">
+  <div class="section-label">市场背景</div>
+  <div class="section-title">品牌广告预算集中在三类客户手中<br>逻辑和痛点各不相同</div>
+  <div class="section-sub">理解三类客户的本质差异，是设计正确解决方案的前提。</div>
+  <div class="client-grid">
+
+    <div class="client-card cc-a">
+      <div class="client-head">
+        <span class="client-priority">P0 · 国际成熟品牌</span>
+        <h3>有战略、有预算<br>缺实时度量工具</h3>
+        <div class="client-sub">百威 / 喜力 / 嘉士伯 / 联合利华 / 宝洁 / 雀巢 / 玛氏 / 百事</div>
+        <div class="rep-chips">
+          <span class="rep-chip">百威</span><span class="rep-chip">喜力</span><span class="rep-chip">宝洁</span>
+          <span class="rep-chip">联合利华</span><span class="rep-chip">雀巢</span><span class="rep-chip">玛氏</span>
         </div>
       </div>
-    </a>
-
-    <!-- Solution A -->
-    <a class="card card-a" href="solution-a-steps.html">
-      <div class="card-accent"></div>
-      <div class="card-inner">
-        <span class="card-tag">Solution A · 国际成熟品牌</span>
-        <h2>小红书品牌心智<br>度量体系</h2>
-        <p class="card-desc">以 Kantar/Nielsen/Ipsos brand health tracking 为蓝本，用小红书 UGC + AI 构建实时品牌心智度量体系——从诊断到 Brand Lift 到销售归因，首次打通品牌心智到生意的完整链路。</p>
-        <div class="card-chips">
-          <span class="card-chip">品牌心智诊断</span>
-          <span class="card-chip">实时 Brand Lift</span>
-          <span class="card-chip">Sponsorship ROI</span>
-          <span class="card-chip">销售归因</span>
-        </div>
-        <span class="card-cta">查看方案 →</span>
+      <div class="client-body">
+        <div class="client-trait"><span class="trait-dot"></span>有完整的品牌战略和 Brand Team，品牌广告预算稳定</div>
+        <div class="client-trait"><span class="trait-dot"></span>每季度/大 Campaign 前后请 Kantar 做 brand health tracking，但报告往往延后数月，发现问题时已错过窗口</div>
+        <div class="client-trait"><span class="trait-dot"></span>每年大量 Sponsorship 预算（赛事/音乐节/极限运动），但越来越被挑战：这些赞助到底能不能驱动终端销售？</div>
       </div>
-    </a>
-
-    <!-- Solution B -->
-    <a class="card card-b" href="solution-b-steps.html">
-      <div class="card-accent"></div>
-      <div class="card-inner">
-        <span class="card-tag">Solution B · 国民品牌焕新</span>
-        <h2>国民品牌焕新引擎<br>央视 / 卫视联合 IP</h2>
-        <p class="card-desc">以央视/卫视权威 IP 为背书，以小红书社区为承接阵地，用三种能力帮品牌完成年轻化软着陆——流量承接、双向共振、年轻化效果度量。</p>
-        <div class="card-chips">
-          <span class="card-chip">央视 / 卫视 IP</span>
-          <span class="card-chip">UGC 二次传播</span>
-          <span class="card-chip">双向互动共振</span>
-          <span class="card-chip">灵犀度量</span>
-        </div>
-        <span class="card-cta">查看方案 →</span>
+      <div class="client-foot">
+        <div class="client-pain-label">核心诉求</div>
+        <div class="client-pain">Brand health 实时度量 + Sponsorship 商业归因</div>
       </div>
-    </a>
+    </div>
 
-    <!-- Solution C -->
-    <a class="card card-c" href="solution-c-steps.html">
-      <div class="card-accent"></div>
-      <div class="card-inner">
-        <span class="card-tag">Solution C · 白牌 / 新兴品牌</span>
-        <h2>Red Brand Studio<br>一站式升级解决方案</h2>
-        <p class="card-desc">品牌诊断 × 视觉语言体系重建 × 内容落地 × 效果验证——第一次让品牌预算真正可度量，帮年销 1 亿+ 的新兴品牌完成从"有流量"到"有品牌"的跃迁。</p>
-        <div class="card-chips">
-          <span class="card-chip">灵犀品牌诊断</span>
-          <span class="card-chip">Red Partners 共创</span>
-          <span class="card-chip">KFS & IP 落地</span>
-          <span class="card-chip">成效可度量</span>
+    <div class="client-card cc-b">
+      <div class="client-head">
+        <span class="client-priority">P1 · 有钱国企 / 卫视爱好者</span>
+        <h3>大曝光有了<br>年轻人感知没有了</h3>
+        <div class="client-sub">茅台 / 五粮液 / 洋河 / 汾酒 / 东阿阿胶 / 飞鹤</div>
+        <div class="rep-chips">
+          <span class="rep-chip">茅台</span><span class="rep-chip">五粮液</span><span class="rep-chip">洋河</span>
+          <span class="rep-chip">汾酒</span><span class="rep-chip">东阿阿胶</span><span class="rep-chip">飞鹤</span>
         </div>
-        <span class="card-cta">查看方案 →</span>
       </div>
-    </a>
+      <div class="client-body">
+        <div class="client-trait"><span class="trait-dot"></span>习惯投央视/卫视，「大曝光 + 国家认证感」是核心逻辑，品牌广告预算稳定且规模大</div>
+        <div class="client-trait"><span class="trait-dot"></span>央视/卫视覆盖广，但年轻人越来越不看电视，品牌在 18-35 岁消费者中缺乏情感共鸣</div>
+        <div class="client-trait"><span class="trait-dot"></span>有年轻化焦虑但没有清晰路径——不知道用什么方式才能真正打动年轻消费者</div>
+      </div>
+      <div class="client-foot">
+        <div class="client-pain-label">核心诉求</div>
+        <div class="client-pain">在保持大曝光的同时，与年轻人建立真实的情感相关性</div>
+      </div>
+    </div>
 
-    <!-- Beer Dashboard -->
-    <a class="card card-beer" href="beer-dashboard.html">
-      <div class="card-accent"></div>
-      <div class="card-inner">
-        <span class="card-tag">Data Dashboard · 啤酒行业</span>
-        <h2>啤酒行业<br>小红书数据看板</h2>
-        <p class="card-desc">啤酒行业品牌在小红书的核心数据洞察——品牌声量、人群画像、内容趋势、竞品对比，为品牌营销决策提供实时数据支撑。</p>
-        <div class="card-chips">
-          <span class="card-chip">品牌声量对比</span>
-          <span class="card-chip">人群画像</span>
-          <span class="card-chip">内容趋势</span>
-          <span class="card-chip">竞品 Benchmark</span>
+    <div class="client-card cc-c">
+      <div class="client-head">
+        <span class="client-priority">P2 · 赚到钱的大白牌</span>
+        <h3>销量有了<br>品牌心智没有了</h3>
+        <div class="client-sub">大健康新锐 / 宠物食品新兴 / 母婴辅食 / 功能饮料</div>
+        <div class="rep-chips">
+          <span class="rep-chip">元气森林</span><span class="rep-chip">认养一头牛</span><span class="rep-chip">小鲜炖</span>
+          <span class="rep-chip">王小卤</span><span class="rep-chip">若客</span>
         </div>
-        <span class="card-cta">查看看板 →</span>
       </div>
-    </a>
+      <div class="client-body">
+        <div class="client-trait"><span class="trait-dot"></span>靠效果广告和白牌竞争把销量做起来了，但没有品牌心智积累</div>
+        <div class="client-trait"><span class="trait-dot"></span>竞争越来越卷，品牌溢价空间/利润空间越来越薄，媒介成本飞涨，复购率低</div>
+        <div class="client-trait"><span class="trait-dot"></span>老板不相信品牌广告有用，内部 CFO 问不清楚 ROI，品牌预算立项难</div>
+      </div>
+      <div class="client-foot">
+        <div class="client-pain-label">核心诉求</div>
+        <div class="client-pain">用数据证明品牌广告的 ROI + 系统性制定品牌策略与视觉体系</div>
+      </div>
+    </div>
 
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══ SECTION 2: 广告主的钱在哪里 ══ -->
+<div class="section">
+  <div class="section-label">市场机会</div>
+  <div class="section-title">广告主的钱今天在哪里<br>小红书的机会点在哪里</div>
+  <div class="section-sub">各渠道在「销售归因 / 实时数据 / 品质UGC / 品牌度量」四个维度的能力差异，决定了小红书的差异化机会。</div>
+
+  <div style="border:1px solid rgba(255,255,255,.09);border-radius:16px;overflow:hidden;">
+    <table class="budget-table">
+      <thead>
+        <tr>
+          <th>渠道（规模）</th>
+          <th>① 销售归因</th>
+          <th>② 实时数据</th>
+          <th>③ 品牌形象正向UGC</th>
+          <th>④ 品牌度量</th>
+          <th>核心痛点 / 小红书机会</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="channel-name">电视 / 央视 / OTV</div><div class="channel-size">~900亿</div></td>
+          <td><span class="cap-bad">✕</span></td>
+          <td><span class="cap-bad">✕</span></td>
+          <td><span class="cap-bad">✕</span></td>
+          <td><span class="cap-bad">✕</span></td>
+          <td>年轻人不看；无数据归因 → <span class="opp-badge">Sol B: 线上延伸承接</span></td>
+        </tr>
+        <tr>
+          <td><div class="channel-name">效果广告 / 抖音</div><div class="channel-size">~3000亿</div></td>
+          <td><span class="cap-good">✓</span></td>
+          <td><span class="cap-good">✓</span></td>
+          <td><span class="cap-bad">✕</span></td>
+          <td><span class="cap-mid">△</span></td>
+          <td>洗同一波人；媒介成本飞涨 → <span class="opp-badge">Sol A/C: 品牌心智补位</span></td>
+        </tr>
+        <tr>
+          <td><div class="channel-name">抖音品牌广告</div><div class="channel-size">~600亿</div></td>
+          <td><span class="cap-bad">✕</span></td>
+          <td><span class="cap-mid">△</span></td>
+          <td><span class="cap-mid">△ 娱乐向</span></td>
+          <td><span class="cap-bad">✕</span></td>
+          <td>内容生态偏促销感；缺乏真实品牌UGC → <span class="opp-badge">Sol A: 心智度量替代</span></td>
+        </tr>
+        <tr>
+          <td><div class="channel-name">分众 / 电梯媒体</div><div class="channel-size">122亿</div></td>
+          <td><span class="cap-bad">✕</span></td>
+          <td><span class="cap-bad">✕</span></td>
+          <td><span class="cap-bad">✕</span></td>
+          <td><span class="cap-bad">✕</span></td>
+          <td>强制曝光；除天攻外无数据 → <span class="opp-badge">Sol C: 品牌建设替代</span></td>
+        </tr>
+        <tr>
+          <td><div class="channel-name">线下 Sponsorship</div><div class="channel-size">~400亿</div></td>
+          <td><span class="cap-bad">✕</span></td>
+          <td><span class="cap-bad">✕</span></td>
+          <td><span class="cap-bad">✕</span></td>
+          <td><span class="cap-bad">✕</span></td>
+          <td>未数字化，线上无人知晓，无终端归因 → <span class="opp-badge">Sol A: Sponsorship归因</span></td>
+        </tr>
+        <tr>
+          <td><div class="channel-name">Kantar / 第三方调研</div><div class="channel-size">~35亿</div></td>
+          <td><span class="cap-bad">✕</span></td>
+          <td><span class="cap-bad">✕</span></td>
+          <td><span class="cap-bad">✕</span></td>
+          <td><span class="cap-good">✓</span></td>
+          <td>贵、慢、小样本，不可行动 → <span class="opp-badge">Sol A: 实时替代</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══ SECTION 3: 品牌广告的价值 ══ -->
+<div class="section">
+  <div class="section-label">为什么要做品牌广告</div>
+  <div class="section-title">只押效果广告<br>正在积累三个系统性风险</div>
+  <div class="section-sub">短期数据好看，但每一天都在消耗品牌的长期增长能力。</div>
+
+  <div class="value-grid">
+    <!-- 三个风险 -->
+    <div class="risk-cards">
+      <div class="risk-card">
+        <span class="risk-icon">📉</span>
+        <div>
+          <div class="risk-title">人群池在收缩</div>
+          <div class="risk-desc">效果广告只找已有购买意向的人，反复触达同一批人，没有新人进入品牌认知漏斗——人群资产在悄悄耗尽。</div>
+        </div>
+      </div>
+      <div class="risk-card">
+        <span class="risk-icon">🔄</span>
+        <div>
+          <div class="risk-title">没有忠诚度</div>
+          <div class="risk-desc">消费者不知道为什么选你，遇到更便宜的立刻走人——复购靠促销不靠品牌，利润空间越来越薄。</div>
+        </div>
+      </div>
+      <div class="risk-card">
+        <span class="risk-icon">💸</span>
+        <div>
+          <div class="risk-title">媒介成本飞涨</div>
+          <div class="risk-desc">没有品牌心智兜底，CPM/CPT 持续上涨，ROI 曲线向下——越买越贵，越贵越难停。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 品牌广告的5层价值 -->
+    <div class="funnel-wrap">
+      <div class="funnel-title">📊 品牌广告驱动五个层次的商业回报</div>
+      <div class="funnel-steps">
+        <div class="funnel-step fs1">
+          <span class="fs-num">①</span>
+          <span class="fs-label">品牌溢价</span>
+          <span class="fs-desc">消费者愿意为有心智的品牌多付钱，毛利率更高</span>
+        </div>
+        <div class="funnel-step fs2">
+          <span class="fs-num">②</span>
+          <span class="fs-label">复购提升</span>
+          <span class="fs-desc">品牌认知建立后，用户回购不需要每次靠促销触发</span>
+        </div>
+        <div class="funnel-step fs3">
+          <span class="fs-num">③</span>
+          <span class="fs-label">高效拉新</span>
+          <span class="fs-desc">品牌心智积累后，新用户更容易被种草转化，CAC 下降</span>
+        </div>
+        <div class="funnel-step fs4">
+          <span class="fs-num">④</span>
+          <span class="fs-label">效果成本下降</span>
+          <span class="fs-desc">做了品牌的 CPA 稳中有降，没做品牌的 CPA 持续上涨</span>
+        </div>
+        <div class="funnel-step fs5">
+          <span class="fs-num">⑤</span>
+          <span class="fs-label">Commercial Growth</span>
+          <span class="fs-desc">品牌 + 效果双轮驱动，GMV 增速显著优于纯效果模式</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 数据示意 -->
+  <div class="chart-row">
+    <div class="mini-chart">
+      <div class="mc-title">第2年 GMV 增速：品牌建设 vs 纯产品销售</div>
+      <div class="mc-compare">
+        <div class="mc-row">
+          <span class="mc-label">品牌建设组</span>
+          <div class="mc-bar-wrap"><div class="mc-bar bar-brand" style="width:80%"></div></div>
+          <span class="mc-val val-up">+12%</span>
+        </div>
+        <div class="mc-row">
+          <span class="mc-label">纯产品销售</span>
+          <div class="mc-bar-wrap"><div class="mc-bar bar-perf" style="width:95%"></div></div>
+          <span class="mc-val val-up">+31%</span>
+        </div>
+      </div>
+      <div style="font-size:11px;color:rgba(255,255,255,.25);margin-top:10px;">↑ GMV 增速，第2年</div>
+    </div>
+    <div class="mini-chart">
+      <div class="mc-title">第2年 CPA 变化：品牌建设 vs 纯产品销售</div>
+      <div class="mc-compare">
+        <div class="mc-row">
+          <span class="mc-label">品牌建设组</span>
+          <div class="mc-bar-wrap"><div class="mc-bar bar-brand" style="width:35%"></div></div>
+          <span class="mc-val" style="color:#40c060;">-61%</span>
+        </div>
+        <div class="mc-row">
+          <span class="mc-label">纯产品销售</span>
+          <div class="mc-bar-wrap"><div class="mc-bar bar-perf" style="width:65%"></div></div>
+          <span class="mc-val" style="color:#ff6060;">-30%</span>
+        </div>
+      </div>
+      <div style="font-size:11px;color:rgba(255,255,255,.25);margin-top:10px;">↓ CPA 降幅，第2年（品牌建设 CPA 降幅更大）</div>
+    </div>
+  </div>
+
+  <!-- 三个 Solution 入口 -->
+  <div style="margin-top:8px;">
+    <div style="font-size:13px;font-weight:800;color:rgba(255,255,255,.4);margin-bottom:14px;letter-spacing:.5px;">针对三类客户的解决方案 →</div>
+    <div class="sol-cards">
+      <a class="sol-card sol-a" href="solution-a-steps.html">
+        <span class="sol-tag">Solution A · P0 · 国际成熟品牌</span>
+        <h3>小红书品牌心智度量体系</h3>
+        <p>以 Kantar/Nielsen 为蓝本，用 UGC + AI 构建实时 brand health tracking + Sponsorship 归因</p>
+        <span class="sol-cta">查看方案 →</span>
+      </a>
+      <a class="sol-card sol-b" href="solution-b-steps.html">
+        <span class="sol-tag">Solution B · P1 · 有钱国企</span>
+        <h3>国民品牌焕新引擎</h3>
+        <p>央视/卫视 IP × 小红书社区三板斧：流量承接 · 双向共振 · 年轻化效果度量</p>
+        <span class="sol-cta">查看方案 →</span>
+      </a>
+      <a class="sol-card sol-c" href="solution-c-steps.html">
+        <span class="sol-tag">Solution C · P2 · 白牌新兴品牌</span>
+        <h3>Red Brand Studio</h3>
+        <p>品牌诊断 × 视觉语言重建 × 内容落地 × 效果验证，一站式品牌跃迁服务</p>
+        <span class="sol-cta">查看方案 →</span>
+      </a>
+    </div>
   </div>
 </div>
 
 <footer>Brand Marketing Solutions Hub · Powered by 小红书灵犀</footer>
-
 </body>
 </html>
