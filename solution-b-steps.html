@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>国民品牌焕新引擎 — Solution B</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      background: #faf8f5;
+      color: #1a1a1a;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 55%, #12254a 100%);
+      color: #fff;
+      padding: 60px 64px 52px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute; top: -80px; right: -80px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(255,80,20,.22) 0%, transparent 68%);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: "";
+      position: absolute; bottom: -50px; left: 260px;
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(255,180,0,.14) 0%, transparent 68%);
+      border-radius: 50%;
+    }
+    .tag {
+      display: inline-block;
+      background: rgba(255,80,20,.18);
+      border: 1px solid rgba(255,80,20,.45);
+      color: #ff7a4a;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 4px 13px; border-radius: 20px;
+      margin-bottom: 22px;
+    }
+    .hero h1 {
+      font-size: 44px; font-weight: 900;
+      line-height: 1.18; margin-bottom: 16px;
+      position: relative;
+    }
+    .hero h1 em { color: #ff5a1f; font-style: normal; }
+    .hero .subtitle {
+      font-size: 16px; color: rgba(255,255,255,.6);
+      line-height: 1.75; max-width: 700px;
+      position: relative;
+    }
+    .hero .subtitle strong { color: rgba(255,255,255,.9); font-weight: 600; }
+
+    /* ── PAIN BLOCK ── */
+    .pain-block {
+      background: #fff;
+      border-left: 5px solid #ff5a1f;
+      padding: 36px 64px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .pain-col h3 {
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: #999; margin-bottom: 16px;
+    }
+    .pain-col.target h3 { color: #3a5ce6; }
+    .pain-col.pain h3 { color: #e63900; }
+    .pain-col .audience {
+      font-size: 20px; font-weight: 800; color: #1a1a1a;
+      line-height: 1.4; margin-bottom: 8px;
+    }
+    .pain-col .audience-sub {
+      font-size: 13px; color: #888;
+    }
+    .pain-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .pain-list li {
+      font-size: 14.5px; color: #444; line-height: 1.65;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .pain-list li::before {
+      content: "→";
+      color: #ff5a1f; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* ── EQUATION ── */
+    .equation {
+      background: #f5f0eb;
+      padding: 40px 64px;
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+    .eq-block {
+      flex: 1; min-width: 200px;
+      background: #fff; border-radius: 16px;
+      padding: 24px 28px; text-align: center;
+      border: 2px solid #e8e0d8;
+    }
+    .eq-block .eq-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: #aaa; margin-bottom: 10px;
+    }
+    .eq-block .eq-main { font-size: 18px; font-weight: 800; color: #1a1a1a; line-height: 1.3; }
+    .eq-block .eq-sub { font-size: 12px; color: #999; margin-top: 6px; }
+    .eq-block.highlight {
+      background: linear-gradient(135deg, #ff5a1f, #cc3a00);
+      border-color: transparent; color: #fff;
+    }
+    .eq-block.highlight .eq-label { color: rgba(255,255,255,.65); }
+    .eq-block.highlight .eq-main { color: #fff; }
+    .eq-block.highlight .eq-sub { color: rgba(255,255,255,.7); }
+    .eq-op {
+      font-size: 32px; font-weight: 200; color: #ccc; flex: 0;
+    }
+
+    /* ── SECTION ── */
+    .section { padding: 52px 64px; }
+    .section-alt { background: #fff; }
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+      text-transform: uppercase; color: #ff5a1f;
+      margin-bottom: 6px;
+    }
+    .section-title {
+      font-size: 26px; font-weight: 900; color: #1a1a1a;
+      margin-bottom: 8px; line-height: 1.25;
+    }
+    .section-desc {
+      font-size: 15px; color: #666; line-height: 1.75;
+      max-width: 680px; margin-bottom: 36px;
+    }
+
+    /* ── THREE PILLARS ── */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .pillar {
+      background: #faf8f5;
+      border: 1.5px solid #ede6dc;
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .pillar-top {
+      padding: 26px 26px 18px;
+      border-bottom: 1px solid #ede6dc;
+    }
+    .pillar-num {
+      font-size: 11px; font-weight: 800; letter-spacing: 2px;
+      color: #ff5a1f; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .pillar-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+    .pillar h4 { font-size: 17px; font-weight: 800; color: #1a1a1a; line-height: 1.3; margin-bottom: 6px; }
+    .pillar .what-xhs {
+      font-size: 11px; font-weight: 700; color: #ff5a1f;
+      letter-spacing: 1px; text-transform: uppercase;
+      background: rgba(255,90,31,.08);
+      padding: 3px 9px; border-radius: 20px;
+      display: inline-block; margin-top: 4px;
+    }
+    .pillar-body { padding: 20px 26px 24px; }
+    .pillar-body p {
+      font-size: 14.5px; color: #555; line-height: 1.75; margin-bottom: 14px;
+    }
+    .pillar-mechanic {
+      background: #fff;
+      border: 1px solid #ede6dc;
+      border-radius: 10px;
+      padding: 12px 16px;
+    }
+    .pillar-mechanic .mech-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: #aaa; margin-bottom: 8px;
+    }
+    .pillar-mechanic ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .pillar-mechanic ul li {
+      font-size: 12.5px; color: #444; line-height: 1.5;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .pillar-mechanic ul li .dot {
+      width: 16px; height: 16px; border-radius: 50%;
+      background: #ff5a1f; color: #fff;
+      font-size: 9px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .pillar-footer {
+      padding: 12px 26px;
+      background: rgba(255,90,31,.05);
+      border-top: 1px solid #ede6dc;
+      font-size: 11.5px; color: #cc4400; font-weight: 700;
+    }
+
+    /* ── IP DEMO CARDS ── */
+    .ip-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    .ip-card {
+      background: #fff;
+      border: 1.5px solid #ede6dc;
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      min-height: 300px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .ip-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 36px rgba(0,0,0,.09);
+    }
+    /* 左侧图片列 */
+    .ip-card-img {
+      width: 280px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .ip-card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    /* 右侧内容列 */
+    .ip-card-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      border-left: 1px solid #f0e8de;
+    }
+    .ip-card-head {
+      padding: 20px 24px 14px;
+      display: flex; align-items: flex-start; gap: 14px;
+      border-bottom: 1px solid #f0e8de;
+    }
+    .ip-emoji {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; flex-shrink: 0;
+    }
+    .ip-head-text { flex: 1; }
+    .ip-source {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 5px;
+    }
+    .ip-card-head h3 {
+      font-size: 15px; font-weight: 800; color: #1a1a1a; line-height: 1.3;
+    }
+    .ip-card-head .ip-hook {
+      font-size: 12.5px; color: #888; margin-top: 4px; line-height: 1.5;
+    }
+    .ip-card-body { padding: 16px 24px 18px; flex: 1; }
+    .ip-problem {
+      background: #fff8f5;
+      border-left: 3px solid #ff5a1f;
+      padding: 8px 12px;
+      font-size: 13px; color: #555; line-height: 1.65;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 14px;
+    }
+    .ip-problem strong { color: #cc3a00; }
+    .ip-plays { display: flex; flex-direction: column; gap: 8px; }
+    .ip-play {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 13px; color: #444; line-height: 1.6;
+    }
+    .play-badge {
+      font-size: 9px; font-weight: 800; letter-spacing: .5px;
+      color: #fff; padding: 2px 7px; border-radius: 10px;
+      flex-shrink: 0; margin-top: 3px; white-space: nowrap;
+    }
+    .ip-card-foot {
+      padding: 10px 24px;
+      border-top: 1px solid #f0e8de;
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .cat-tag {
+      font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 20px;
+    }
+
+    /* card colors */
+    .c1 .ip-emoji { background: #fff0ec; }
+    .c1 .ip-source { color: #cc3a00; }
+    .c1 .play-badge { background: #ff5a1f; }
+    .c1 .cat-tag { background: #fff0ec; color: #cc3a00; }
+
+    .c2 .ip-emoji { background: #fffbe6; }
+    .c2 .ip-source { color: #a07000; }
+    .c2 .play-badge { background: #d4900a; }
+    .c2 .cat-tag { background: #fffbe6; color: #a07000; }
+
+    .c3 .ip-emoji { background: #edfaf0; }
+    .c3 .ip-source { color: #1a7a45; }
+    .c3 .play-badge { background: #25a058; }
+    .c3 .cat-tag { background: #edfaf0; color: #1a7a45; }
+
+    .c4 .ip-emoji { background: #eef2ff; }
+    .c4 .ip-source { color: #3040c0; }
+    .c4 .play-badge { background: #3a5ce6; }
+    .c4 .cat-tag { background: #eef2ff; color: #3040c0; }
+
+    /* ── DATA BAR ── */
+    .data-bar {
+      background: linear-gradient(135deg, #0f0f1a, #12254a);
+      color: #fff;
+      padding: 44px 64px;
+      display: flex; gap: 0; flex-wrap: wrap;
+    }
+    .data-item {
+      flex: 1; min-width: 140px;
+      text-align: center;
+      padding: 0 24px;
+      border-right: 1px solid rgba(255,255,255,.1);
+    }
+    .data-item:last-child { border-right: none; }
+    .data-num {
+      font-size: 38px; font-weight: 900;
+      color: #ff7a4a; line-height: 1; margin-bottom: 8px;
+    }
+    .data-label {
+      font-size: 12px; color: rgba(255,255,255,.55); line-height: 1.5;
+    }
+
+    /* ── BOTTOM ── */
+    .bottom {
+      background: #ff5a1f; color: #fff;
+      padding: 30px 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .bottom .slogan {
+      font-size: 20px; font-weight: 900; line-height: 1.3;
+    }
+    .bottom .sub {
+      font-size: 13px; opacity: .75; max-width: 500px; line-height: 1.6;
+    }
+
+    @media (max-width: 900px) {
+      .hero { padding: 40px 28px; }
+      .hero h1 { font-size: 32px; }
+      .pain-block { grid-template-columns: 1fr; padding: 32px 28px; }
+      .equation { padding: 32px 28px; }
+      .section { padding: 40px 28px; }
+      .pillars { grid-template-columns: 1fr; }
+      .ip-grid { grid-template-columns: 1fr; }
+      .data-bar { padding: 36px 28px; gap: 32px; }
+      .data-item { border-right: none; }
+      .bottom { padding: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="tag">Solution B · 国民品牌年轻化</div>
+  <h1>在电视上很响亮<br>在年轻人这里<em>很陌生</em></h1>
+  <p class="subtitle">
+    茅台、五粮液、洋河们每年砸重金冠名央视/卫视，<strong>覆盖了13亿中国人</strong>——<br>
+    但那13亿里，<strong>18-35岁的人根本不在看电视</strong>。<br>
+    小红书不是另一块广告牌，而是把品牌资产从电视翻译进年轻人真实生活的转化器。
+  </p>
+</div>
+
+<!-- ══ PAIN BLOCK ══ -->
+<div class="pain-block">
+  <div class="pain-col target">
+    <h3>目标客户</h3>
+    <div class="audience">有钱国企 / 国民品牌</div>
+    <div class="audience-sub">茅台 · 五粮液 · 洋河 · 伊利 · 蒙牛 · 农夫山泉 · 王老吉 · 同仁堂</div>
+  </div>
+  <div class="pain-col pain">
+    <h3>结构性危机（正在加速）</h3>
+    <ul class="pain-list">
+      <li>央视/卫视触达不到 18-35 岁，年轻人根本不看电视</li>
+      <li>品牌形象权威但"距离感"强，缺乏与年轻人的情感共鸣和双向对话</li>
+      <li>每年花大量品牌预算，却没有工具衡量"品牌在年轻人心中的感知变化"</li>
+      <li>现有核心客群在老去，年轻一代尚未进入品牌漏斗，老龄化风险持续积累</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══ EQUATION ══ -->
+<div class="equation">
+  <div class="eq-block">
+    <div class="eq-label">已有资产</div>
+    <div class="eq-main">央视 / 卫视<br>权威大IP</div>
+    <div class="eq-sub">国民认知度 · 仪式感背书</div>
+  </div>
+  <div class="eq-op">×</div>
+  <div class="eq-block">
+    <div class="eq-label">小红书提供</div>
+    <div class="eq-main">年轻人真实<br>生活阵地</div>
+    <div class="eq-sub">3亿月活 · 18-35岁核心圈层</div>
+  </div>
+  <div class="eq-op">=</div>
+  <div class="eq-block highlight">
+    <div class="eq-label">结果</div>
+    <div class="eq-main">品牌声量<br>精准落地年轻人</div>
+    <div class="eq-sub">从"听过"到"懂了有认同"</div>
+  </div>
+</div>
+
+<!-- ══ THREE PILLARS ══ -->
+<div class="section">
+  <div class="section-label">小红书独有，央视给不了的</div>
+  <div class="section-title">三把刀，解决三个根本问题</div>
+  <div class="section-desc">不是多一个投放渠道，而是三种截然不同的能力——每一种都是电视广告做不到的。</div>
+
+  <div class="pillars">
+
+    <!-- 刀1 -->
+    <div class="pillar">
+      <div class="pillar-top">
+        <div class="pillar-num">刀 01 · 线上流量承接</div>
+        <span class="pillar-icon">📡</span>
+        <h4>把大IP资产引入小红书<br>激活年轻人UGC二次传播</h4>
+        <span class="what-xhs">解决：触达不到年轻人</span>
+      </div>
+      <div class="pillar-body">
+        <p>品牌已有大体量的央视/卫视IP投入，但这些曝光对年轻人来说等于零。把IP内容引入小红书，才能让品牌的大资产真正被年轻人看到——并通过UGC机制持续发酵、二次传播。</p>
+        <div class="pillar-mechanic">
+          <div class="mech-label">小红书独有机制</div>
+          <ul>
+            <li><span class="dot">1</span>品牌冠名话题页，节目播出后在小红书激活年轻人UGC讨论，话题热度持续发酵</li>
+            <li><span class="dot">2</span>红薯集结（NNS流量激励）：给参与话题的用户额外流量激励，快速炒热、扩大二次传播</li>
+            <li><span class="dot">3</span>搜索品牌专区（品专）：节目相关关键词搜索时品牌卡位，拦截主动搜索的年轻用户</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pillar-footer">→ 让电视里的品牌曝光，在年轻人手机里获得二次生命</div>
+    </div>
+
+    <!-- 刀2 -->
+    <div class="pillar">
+      <div class="pillar-top">
+        <div class="pillar-num">刀 02 · 双向互动共振</div>
+        <span class="pillar-icon">💬</span>
+        <h4>从单向广播到双向对话<br>让品牌从"品牌说"变成"真人说"</h4>
+        <span class="what-xhs">解决：权威感强但情感距离大</span>
+      </div>
+      <div class="pillar-body">
+        <p>电视广告是单向的、权威的。年轻人不排斥品牌，但排斥"被灌输"。小红书的社区机制让品牌能真正和年轻人双向对话——从"我们的广告"变成"我们的话题"，情感共鸣自然生长。</p>
+        <div class="pillar-mechanic">
+          <div class="mech-label">小红书独有机制</div>
+          <ul>
+            <li><span class="dot">1</span>节目嘉宾/明星入驻小红书，发真实幕后笔记，品牌软植入——真实感是电视植入无法复制的</li>
+            <li><span class="dot">2</span>Redlive直播氛围定制：节目播出后品牌直播间承接热度，用户实时互动+品牌即时种草</li>
+            <li><span class="dot">3</span>新品派样+定制图文模版：发起用户真实测评UGC，品牌从"广告主角"变成"生活配角"</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pillar-footer">→ 让年轻人主动说品牌，而不是被动看广告</div>
+    </div>
+
+    <!-- 刀3 -->
+    <div class="pillar">
+      <div class="pillar-top">
+        <div class="pillar-num">刀 03 · 年轻化效果度量</div>
+        <span class="pillar-icon">📊</span>
+        <h4>灵犀数据追踪年轻人心智<br>输出系统性「年轻化报告」</h4>
+        <span class="what-xhs">解决：没有工具量化年轻化成效</span>
+      </div>
+      <div class="pillar-body">
+        <p>收视率告诉你多少人"看了"，但没有任何数据告诉你年轻人对品牌的感知在变好还是变坏。小红书灵犀数据实时追踪18-35岁人群资产变化、品牌心智度量，以及一方购买数据中年轻人群占比提升，让品牌有硬数据向集团汇报年轻化成效。</p>
+        <div class="pillar-mechanic">
+          <div class="mech-label">小红书独有机制</div>
+          <ul>
+            <li><span class="dot">1</span>灵犀人群资产追踪：18-35岁目标人群在话题下的品牌提及量、情感倾向、attribute关键词变化</li>
+            <li><span class="dot">2</span>品牌心智度量：搜索量趋势+UGC情感分析，反映年轻人对品牌的真实认知水位变化</li>
+            <li><span class="dot">3</span>一方购买归因：追踪年轻人群在品牌实际购买中的占比提升，打通心智到生意的完整链路</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pillar-footer">→ 第一次让品牌看到钱花出去之后，年轻人的感知和购买有没有在变</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ IP DEMO ══ -->
+<div class="section section-alt">
+  <div class="section-label">联合IP产品 Demo</div>
+  <div class="section-title">小红书 × 央视/卫视 — 四个快消场景</div>
+  <div class="section-desc">每个IP Demo的核心，是小红书的哪些独有产品能力在为品牌解决具体问题。聚焦食品饮料、酒水、母婴、大健康。</div>
+
+  <div class="ip-grid">
+
+    <!-- Card c1 -->
+    <div class="ip-card c1">
+      <div class="ip-card-img">
+        <img src="https://i.ibb.co/Xk6r4XyQ/image.jpg" alt="酒水"/>
+      </div>
+      <div class="ip-card-right">
+        <div class="ip-card-head">
+          <div class="ip-emoji">🏛️</div>
+          <div class="ip-head-text">
+            <div class="ip-source">CCTV-3 · 文博IP</div>
+            <h3>小红书 × 国家宝藏<br>「酒文化 · 从历史走进年轻人」</h3>
+            <div class="ip-hook">茅台/五粮液/洋河 等酒水品牌 — 文化底蕴是资产，但年轻人感觉"不是我的东西"</div>
+          </div>
+        </div>
+        <div class="ip-card-body">
+          <div class="ip-problem"><strong>核心痛点：</strong>酒水品牌有历史、有文化、有故事，但这些资产只在中老年人那里有共鸣，年轻人觉得"白酒是爸爸喝的"——品牌文化没有完成年轻化翻译。</div>
+          <div class="ip-plays">
+            <div class="ip-play"><span class="play-badge" style="background:#ff5a1f">话题UGC</span><span>#国宝同款酒器# 发起用户晒与品牌相关的古典器物/仪式感场景，品牌冠名话题页，红薯集结流量激励放大UGC声量</span></div>
+            <div class="ip-play"><span class="play-badge" style="background:#ff5a1f">明星笔记</span><span>节目嘉宾入驻小红书，发「古代文人怎么喝酒」笔记，揭秘品牌酿造工艺幕后，真实感强于任何硬广</span></div>
+            <div class="ip-play"><span class="play-badge" style="background:#ff5a1f">品专拦截</span><span>「国家宝藏」「中国酒文化」等搜索词买品专，在年轻人主动搜索时卡位，把文化兴趣转化为品牌认知</span></div>
+            <div class="ip-play"><span class="play-badge" style="background:#ff5a1f">心智追踪</span><span>追踪合作前后18-35岁用户对品牌「文化」「有品位」「送礼」等attribute的提及变化，出具年轻化成效报告</span></div>
+          </div>
+        </div>
+        <div class="ip-card-foot">
+          <span class="cat-tag">酒水</span><span class="cat-tag">白酒 / 黄酒</span><span class="cat-tag">国潮</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card c2 -->
+    <div class="ip-card c2">
+      <div class="ip-card-img">
+        <img src="https://i.ibb.co/nNCpQtTz/image.jpg" alt="本草"/>
+      </div>
+      <div class="ip-card-right">
+        <div class="ip-card-head">
+          <div class="ip-emoji">🌿</div>
+          <div class="ip-head-text">
+            <div class="ip-source">CCTV-4 · 中医文化IP</div>
+            <h3>小红书 × 本草中国<br>「传统滋补焕新 · 让年轻人重新发现中医」</h3>
+            <div class="ip-hook">东阿阿胶 · 小鲜炖 · 童涵春堂 — 有千年背书，但年轻人觉得"那是老人家的东西"</div>
+          </div>
+        </div>
+        <div class="ip-card-body">
+          <div class="ip-problem"><strong>核心痛点：</strong>传统滋补/中医品牌的最大困境是品类认知的代际断层。东阿阿胶、童涵春堂在中老年群体中是金字招牌，但18-35岁消费者对"中医滋补"的第一反应是"养生是中年人的事"。品牌需要一次年轻化重新定义，而不只是换个包装。</div>
+          <div class="ip-plays">
+            <div class="ip-play"><span class="play-badge" style="background:#d4900a">话题重塑</span><span>#年轻人的第一口养生# 冠名话题，联合节目内容把「阿胶/燕窝/人参」从"老人专属"重新定义为"精致生活方式"，红薯集结激励年轻用户晒滋补日常</span></div>
+            <div class="ip-play"><span class="play-badge" style="background:#d4900a">专家直播</span><span>节目中医专家/本草达人入驻小红书，Redlive直播间讲「现代人怎么科学滋补」，品牌冠名，专业背书转化为年轻人信任</span></div>
+            <div class="ip-play"><span class="play-badge" style="background:#d4900a">新品派样</span><span>针对健康/养生兴趣圈层定向派样，回收年轻用户真实体验UGC，真实口碑比任何广告都有说服力</span></div>
+            <div class="ip-play"><span class="play-badge" style="background:#d4900a">心智追踪</span><span>追踪「养生」「滋补」「中医」相关搜索词在18-35岁人群中的增长，以及品牌attribute从"老派"向"精致/科学"的迁移</span></div>
+          </div>
+        </div>
+        <div class="ip-card-foot">
+          <span class="cat-tag">传统滋补</span><span class="cat-tag">中医大健康</span><span class="cat-tag">东阿阿胶</span><span class="cat-tag">童涵春堂</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card c3 -->
+    <div class="ip-card c3">
+      <div class="ip-card-img">
+        <img src="https://i.ibb.co/q3cHYnhD/image.jpg" alt="美食"/>
+      </div>
+      <div class="ip-card-right">
+        <div class="ip-card-head">
+          <div class="ip-emoji">🍜</div>
+          <div class="ip-head-text">
+            <div class="ip-source">CCTV × 小红书 · 联合原创IP</div>
+            <h3>小红书 × 中国宝藏美食<br>「地域美食种草 · 让品牌活在年轻人的餐桌上」</h3>
+            <div class="ip-hook">饮料/速食/调味料 — 品牌知名度高，但在年轻人餐桌场景里存在感低</div>
+          </div>
+        </div>
+        <div class="ip-card-body">
+          <div class="ip-problem"><strong>核心痛点：</strong>饮料、速食品牌在年轻人中的问题不是"没听过"，而是"不在他们日常生活的内容里"。小红书是年轻人最大的美食内容消费和生产平台，品牌需要进入这个场景，而不只是投广告。</div>
+          <div class="ip-plays">
+            <div class="ip-play"><span class="play-badge" style="background:#25a058">UGC征集</span><span>#中国宝藏美食地图# 全国征集用户晒家乡美食，品牌冠名话题，内容自然与品牌场景（下酒菜/配饮料）深度绑定</span></div>
+            <div class="ip-play"><span class="play-badge" style="background:#25a058">直播种草</span><span>节目厨师/美食博主小红书直播复刻「央视同款」，Redlive定制直播间氛围，品牌在峰值热度时刻自然植入</span></div>
+            <div class="ip-play"><span class="play-badge" style="background:#25a058">惊喜盒子</span><span>搜索「宝藏美食」相关词时，Redbox品牌定制礼盒弹出，拦截最有购买意图的主动搜索用户</span></div>
+            <div class="ip-play"><span class="play-badge" style="background:#25a058">心智追踪</span><span>追踪"下饭""聚餐必备""家乡味"等生活化attribute在品牌UGC中的渗透率变化</span></div>
+          </div>
+        </div>
+        <div class="ip-card-foot">
+          <span class="cat-tag">饮料</span><span class="cat-tag">速食</span><span class="cat-tag">调味料</span><span class="cat-tag">地方文旅</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card c4 -->
+    <div class="ip-card c4">
+      <div class="ip-card-img">
+        <img src="https://i.ibb.co/QRr6qFk/image.jpg" alt="母婴"/>
+      </div>
+      <div class="ip-card-right">
+        <div class="ip-card-head">
+          <div class="ip-emoji">🌱</div>
+          <div class="ip-head-text">
+            <div class="ip-source">湖南卫视 · 生活方式IP</div>
+            <h3>小红书 × 你好生活<br>「健康育儿 · 专业背书转化妈妈信任」</h3>
+            <div class="ip-hook">母婴/大健康品牌 — 专业认可度高，但年轻妈妈的信任来自"真实妈妈说的"</div>
+          </div>
+        </div>
+        <div class="ip-card-body">
+          <div class="ip-problem"><strong>核心痛点：</strong>母婴、大健康品牌最核心的转化门槛是"信任"。年轻父母不信品牌官方，但极度信任"跟我一样的妈妈亲测推荐"。央视背书解决权威性，小红书解决真实感——两者缺一不可。</div>
+          <div class="ip-plays">
+            <div class="ip-play"><span class="play-badge" style="background:#3a5ce6">真实派样</span><span>联合节目发起「新手妈妈好物试用」，定向圈选0-3岁宝宝家庭人群，回收真实育儿测评笔记，口碑从官方背书变为妈妈互信</span></div>
+            <div class="ip-play"><span class="play-badge" style="background:#3a5ce6">专家直播</span><span>节目健康/育儿专家入驻小红书做Redlive直播答疑，品牌冠名直播间，专业可信度+小红书真实互动双重加持</span></div>
+            <div class="ip-play"><span class="play-badge" style="background:#3a5ce6">线下沉浸</span><span>联合节目主题线下亲子市集/有机农场，发起打卡话题，品牌赞助线下活动+线上笔记自然种草形成闭环</span></div>
+            <div class="ip-play"><span class="play-badge" style="background:#3a5ce6">人群资产</span><span>话题互动人群沉淀为品牌DMP定向资产，后续精准再触达，把IP流量转化为品牌私域人群</span></div>
+          </div>
+        </div>
+        <div class="ip-card-foot">
+          <span class="cat-tag">母婴</span><span class="cat-tag">大健康</span><span class="cat-tag">营养品</span><span class="cat-tag">有机食品</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ══ DATA BAR ══ -->
+<div class="data-bar">
+  <div class="data-item">
+    <div class="data-num">14亿+</div>
+    <div class="data-label">春晚合作单次<br>小红书总互动量</div>
+  </div>
+  <div class="data-item">
+    <div class="data-num">622个</div>
+    <div class="data-label">相关热聊话题<br>是上年的 2.4×</div>
+  </div>
+  <div class="data-item">
+    <div class="data-num">3亿+</div>
+    <div class="data-label">月活用户<br>18-35岁占绝对主力</div>
+  </div>
+  <div class="data-item">
+    <div class="data-num">连续3年</div>
+    <div class="data-label">小红书 × 央视春晚<br>独家笔记合作</div>
+  </div>
+  <div class="data-item">
+    <div class="data-num">独家</div>
+    <div class="data-label">小红书一方数据<br>年轻人品牌心智追踪</div>
+  </div>
+</div>
+
+<!-- ══ BOTTOM ══ -->
+<div class="bottom">
+  <div>
+    <div class="slogan">小红书是国民品牌的<br>年轻化翻译官</div>
+  </div>
+  <div class="sub">
+    央视/卫视解决了"多少人看过你"，小红书解决的是"年轻人怎么看你"。<br>
+    触达 · 共鸣 · 度量——三个维度，缺一不可。
+  </div>
+</div>
+
+</body>
+</html>
