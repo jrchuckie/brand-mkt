@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CMO 新标准 — 品牌广告需求变化</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      background: #fff;
+      color: #1a1a2e;
+      padding: 48px;
+      min-height: 100vh;
+    }
+
+    .page-label {
+      font-size: 11px; font-weight: 800; letter-spacing: 3px;
+      text-transform: uppercase; color: #e8192c; margin-bottom: 10px;
+    }
+    .page-title {
+      font-size: 28px; font-weight: 900; color: #1a1a2e;
+      line-height: 1.2; margin-bottom: 6px;
+    }
+    .page-sub {
+      font-size: 14px; color: #888; line-height: 1.7; margin-bottom: 32px;
+    }
+
+    /* ── 矩阵容器 ── */
+    .matrix-wrap {
+      border: 1.5px solid #e0e0e8;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    /* Y轴顶部标签 */
+    .y-top {
+      text-align: center;
+      padding: 16px 0 8px;
+      border-bottom: 1px solid #f0f0f5;
+    }
+    .y-top span {
+      display: inline-block;
+      background: #1a3a6e;
+      color: #fff;
+      font-size: 14px; font-weight: 800;
+      padding: 7px 32px;
+      border-radius: 6px;
+      letter-spacing: 2px;
+    }
+
+    /* 四象限主体 */
+    .quadrants {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* 单个象限 */
+    .quad {
+      padding: 28px 32px;
+      border: 1px solid #f0f0f5;
+    }
+    .quad-title-row {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 14px;
+    }
+    .quad-icon { font-size: 22px; line-height: 1; }
+    .quad-title { font-size: 17px; font-weight: 900; color: #1a1a2e; }
+
+    /* 蓝色副标题块 */
+    .sub-tag {
+      background: #e8f0fb;
+      border-radius: 6px;
+      padding: 9px 16px;
+      margin-bottom: 16px;
+      font-size: 14px; font-weight: 800; color: #1a3a6e;
+    }
+
+    /* bullet list */
+    .bullets { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .bullets li {
+      display: flex; gap: 10px;
+      font-size: 14px; color: #444; line-height: 1.75;
+    }
+    .bullets li .dot {
+      color: #e8192c; font-weight: 900;
+      flex-shrink: 0; margin-top: 3px;
+    }
+    .bullets li strong { color: #e8192c; }
+
+    /* highlight 象限（右上） */
+    .quad-highlight {
+      background: #fff5f7;
+      border: 1.5px solid rgba(232,25,44,.3);
+      position: relative;
+    }
+    .highlight-badge {
+      position: absolute; top: 14px; right: 14px;
+      background: #e8192c; color: #fff;
+      font-size: 11px; font-weight: 800;
+      padding: 4px 12px; border-radius: 4px;
+      letter-spacing: 1px;
+    }
+
+    /* 中间轴区域 */
+    .axis-labels {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 32px;
+      background: #f9f9fc;
+      border-top: 1px solid #e8e8f0;
+      border-bottom: 1px solid #e8e8f0;
+    }
+    .axis-label-text {
+      font-size: 12px; font-weight: 800; color: #aaa; letter-spacing: 1px;
+    }
+    .axis-dashes {
+      flex: 1; margin: 0 16px; height: 1px;
+      background: repeating-linear-gradient(
+        90deg,
+        #ccc 0px, #ccc 6px,
+        transparent 6px, transparent 12px
+      );
+    }
+
+    /* CMO红条 */
+    .cmo-bar {
+      background: #e8192c;
+      padding: 13px 48px;
+      text-align: center;
+    }
+    .cmo-bar span {
+      font-size: 14px; font-weight: 800; color: #fff; line-height: 1.6;
+    }
+
+    /* Y轴底部标签 */
+    .y-bottom {
+      text-align: center;
+      padding: 8px 0 16px;
+      border-top: 1px solid #f0f0f5;
+    }
+    .y-bottom span {
+      display: inline-block;
+      background: #f0f0f5;
+      color: #999;
+      font-size: 14px; font-weight: 800;
+      padding: 7px 32px;
+      border-radius: 6px;
+      letter-spacing: 2px;
+    }
+
+    .note {
+      font-size: 11px; color: #bbb; margin-top: 14px; line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-label">需求变化</div>
+  <div class="page-title">品牌广告需求已经变了 — CMO 的新标准</div>
+  <div class="page-sub">品牌预算的重力正在迁移：从「短期确定性」出发，寻找能进入「长期 × 高确定性」的平台和工具。</div>
+
+  <div class="matrix-wrap">
+
+    <!-- Y轴顶：高确定性 -->
+    <div class="y-top">
+      <span>高确定性</span>
+    </div>
+
+    <!-- 上半象限 -->
+    <div class="quadrants">
+
+      <!-- 左上：效果广告（短期 × 高确定性） -->
+      <div class="quad" style="border-right:1.5px solid #e8e8f0; border-bottom:none;">
+        <div class="quad-title-row">
+          <span class="quad-icon">📣</span>
+          <span class="quad-title">效果广告</span>
+        </div>
+        <div class="sub-tag">ROI清晰，但天花板已现</div>
+        <ul class="bullets">
+          <li><span class="dot">•</span><span>兴趣电商和效果广告提供了最高的短期确定性</span></li>
+          <li><span class="dot">•</span><span>但这个象限正在拥挤且利润稀薄</span></li>
+          <li><span class="dot">•</span><span>过度依赖短期效果导致品牌溢价能力萎缩，最终被迫重建品牌投资</span></li>
+        </ul>
+      </div>
+
+      <!-- 右上：品牌化广告新战场 ★（长期 × 高确定性） -->
+      <div class="quad quad-highlight" style="border-bottom:none;">
+        <div class="highlight-badge">🎯 机会区间</div>
+        <div class="quad-title-row" style="padding-right:90px;">
+          <span class="quad-icon">⚡</span>
+          <span class="quad-title">品牌化广告新战场</span>
+        </div>
+        <div class="sub-tag">让长线投入也能被量化——这是品牌预算的未来</div>
+        <ul class="bullets">
+          <li>
+            <span class="dot">•</span>
+            <span>从单点赞助拆成全年 always-on 社媒活动矩阵：某头部啤酒品牌传统综艺类赞助削减 <strong>-29%</strong>，转而深耕社媒活动，Brand Power 贡献反升 <strong>+38%</strong></span>
+          </li>
+          <li><span class="dot">•</span><span>空中资源和社交结合，加上持续节奏，是目前少数能看到长线 ROI 的打法</span></li>
+          <li><span class="dot">•</span><span>非常看重有系统能比较容易监测知名度的进展和效率</span></li>
+        </ul>
+        <p class="note">*数据来源 Kantar 2025 Key Beer Brands Observation Review</p>
+      </div>
+
+    </div><!-- /上半象限 -->
+
+    <!-- 轴标签行 -->
+    <div class="axis-labels">
+      <span class="axis-label-text">◀ 短期收益</span>
+      <div class="axis-dashes"></div>
+      <span class="axis-label-text">长期收益 ▶</span>
+    </div>
+
+    <!-- CMO痛点红条 -->
+    <div class="cmo-bar">
+      <span>CMO痛点——品牌预算的重力正在迁移：从"短期确定性"出发，寻找能进入"长期×高确定性"的平台和工具</span>
+    </div>
+
+    <!-- 下半象限 -->
+    <div class="quadrants">
+
+      <!-- 左下：纯社媒投放（短期 × 低确定性） -->
+      <div class="quad" style="border-right:1.5px solid #e8e8f0; border-top:none;">
+        <div class="quad-title-row">
+          <span class="quad-icon">💬</span>
+          <span class="quad-title">纯社媒投放</span>
+        </div>
+        <div class="sub-tag">互动数据漂亮，品牌沉淀存疑</div>
+        <ul class="bullets">
+          <li><span class="dot">•</span><span>仅 27% 达人广告留下品牌记忆</span></li>
+          <li><span class="dot">•</span><span>动量 ≠ 品牌资产沉淀</span></li>
+          <li><span class="dot">•</span><span>品牌内容泛滥但缺乏差异化，消费者记住的是内容不是品牌</span></li>
+        </ul>
+      </div>
+
+      <!-- 右下：传统硬广（长期 × 低确定性） -->
+      <div class="quad" style="border-top:none;">
+        <div class="quad-title-row">
+          <span class="quad-icon">📺</span>
+          <span class="quad-title">传统硬广</span>
+        </div>
+        <div class="sub-tag">相信它有效，但证明不了</div>
+        <ul class="bullets">
+          <li><span class="dot">•</span><span>大曝光硬广仍然必要，但在当下预算问责的压力下，它的处境最尴尬</span></li>
+          <li><span class="dot">•</span><span>传统 TV/OTV 投入在缩减，但能替代它维持 Brand Power 的打法还不清晰</span></li>
+          <li><span class="dot">•</span><span>「大品牌时代」的核心资产靠它建立，但现在的效果说不清楚</span></li>
+        </ul>
+      </div>
+
+    </div><!-- /下半象限 -->
+
+    <!-- Y轴底：低确定性 -->
+    <div class="y-bottom">
+      <span>低确定性</span>
+    </div>
+
+  </div><!-- /matrix-wrap -->
+
+</body>
+</html>
