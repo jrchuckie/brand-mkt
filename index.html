@@ -335,30 +335,23 @@
 
   <div style="border:1px solid rgba(255,255,255,.1); border-radius:16px; overflow:hidden; background:#12121c;">
 
-    <!-- X轴标签行（短期 → 长期，左→右） -->
-    <div style="display:grid; grid-template-columns:auto 1fr 1fr auto; align-items:center; padding:4px 28px 4px 84px; gap:0;">
-      <div></div>
-      <div style="text-align:center;">
-        <span style="display:inline-block; background:#e8192c; color:#fff; font-size:13px; font-weight:800; padding:6px 20px; border-radius:20px; letter-spacing:1px;">短期</span>
-      </div>
-      <div style="text-align:center;">
-        <span style="display:inline-block; background:rgba(255,255,255,.1); color:rgba(255,255,255,.5); font-size:13px; font-weight:800; padding:6px 20px; border-radius:20px; letter-spacing:1px;">长期</span>
-      </div>
-      <div style="width:28px;"></div>
-    </div>
+    <!-- 整体布局：左侧Y轴 + 右侧(X轴顶+象限+X轴底) -->
+    <div style="display:grid; grid-template-columns:56px 1fr; padding:16px 28px 20px 20px; gap:0; align-items:stretch;">
 
-    <!-- 主体：Y轴标签 + 四象限 -->
-    <div style="display:grid; grid-template-columns:56px 1fr; align-items:stretch; padding:0 28px 8px 28px; gap:0;">
-
-      <!-- Y轴标签列 -->
-      <div style="display:grid; grid-template-rows:1fr 1fr; align-items:center; justify-items:center; padding:0 8px 0 0;">
-        <div style="display:flex; align-items:center; justify-content:center; height:100%;">
-          <span style="writing-mode:vertical-rl; transform:rotate(180deg); background:#1a6cf5; color:#fff; font-size:13px; font-weight:800; padding:16px 9px; border-radius:20px; letter-spacing:3px; white-space:nowrap;">高确定性</span>
-        </div>
-        <div style="display:flex; align-items:center; justify-content:center; height:100%;">
-          <span style="writing-mode:vertical-rl; transform:rotate(180deg); background:rgba(255,255,255,.08); color:rgba(255,255,255,.4); font-size:13px; font-weight:800; padding:16px 9px; border-radius:20px; letter-spacing:3px; white-space:nowrap;">低确定性</span>
-        </div>
+      <!-- Y轴：高确定性(上端) → 低确定性(下端) -->
+      <div style="display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:0 10px 0 0;">
+        <span style="writing-mode:vertical-rl; transform:rotate(180deg); background:#1a6cf5; color:#fff; font-size:13px; font-weight:800; padding:16px 9px; border-radius:20px; letter-spacing:2px; white-space:nowrap;">高确定性</span>
+        <span style="writing-mode:vertical-rl; transform:rotate(180deg); background:rgba(255,255,255,.08); color:rgba(255,255,255,.4); font-size:13px; font-weight:800; padding:16px 9px; border-radius:20px; letter-spacing:2px; white-space:nowrap;">低确定性</span>
       </div>
+
+      <!-- 右侧：X轴顶 + 象限 + X轴底 -->
+      <div style="display:flex; flex-direction:column; gap:0;">
+
+        <!-- X轴顶标签：短期(左) → 长期(右) -->
+        <div style="display:flex; justify-content:space-between; padding:0 4px; margin-bottom:8px;">
+          <span style="background:#e8192c; color:#fff; font-size:13px; font-weight:800; padding:6px 20px; border-radius:20px; letter-spacing:1px;">短期</span>
+          <span style="background:rgba(255,255,255,.1); color:rgba(255,255,255,.5); font-size:13px; font-weight:800; padding:6px 20px; border-radius:20px; letter-spacing:1px;">长期</span>
+        </div>
 
       <!-- 四象限主体 -->
       <div style="position:relative; border:1px solid rgba(255,255,255,.08); border-radius:12px; overflow:hidden;">
@@ -378,7 +371,7 @@
               <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,.35); letter-spacing:1.5px; margin-bottom:8px;">过去</div>
               <p style="font-size:14px; color:rgba(255,255,255,.5); line-height:1.8;">ROI黑盒，品效预算泾渭分明<br>品牌广告无需向销售数字交代</p>
             </div>
-            <div style="text-align:center; margin:10px 0; font-size:20px;">🕐</div>
+            <div style="text-align:center; margin:10px 0; font-size:22px; color:rgba(255,255,255,.5);">↓</div>
             <div style="background:rgba(232,25,44,.10); border:1px solid rgba(232,25,44,.3); border-radius:10px; padding:14px 16px;">
               <div style="font-size:11px; font-weight:700; color:#e8192c; letter-spacing:1.5px; margin-bottom:8px;">现在</div>
               <p style="font-size:14px; color:#fff; line-height:1.8; margin-bottom:6px;">反漏斗打法 ROI 直接可见<br>兴趣电商制造冲动消费场景</p>
@@ -400,7 +393,7 @@
               <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,.35); letter-spacing:1.5px; margin-bottom:8px;">过去</div>
               <p style="font-size:14px; color:rgba(255,255,255,.5); line-height:1.8;">大曝光靠经验判断，长线投入无需量化<br>IP赞助 = logo 露出，效果无法追踪</p>
             </div>
-            <div style="text-align:center; margin:10px 0; font-size:20px;">🕐</div>
+            <div style="text-align:center; margin:10px 0; font-size:22px; color:rgba(255,255,255,.5);">↓</div>
             <div style="background:rgba(255,48,96,.15); border:1px solid rgba(255,48,96,.5); border-radius:10px; padding:14px 16px;">
               <div style="font-size:11px; font-weight:700; color:#ff6080; letter-spacing:1.5px; margin-bottom:8px;">现在</div>
               <p style="font-size:14px; color:#fff; line-height:1.8; margin-bottom:6px;"><strong style="color:#ffaab8;">IP always-on 复利节奏可测</strong><br>某啤酒品牌传统IP投入 -29%，Brand Power +38%</p>
@@ -418,7 +411,7 @@
               <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,.35); letter-spacing:1.5px; margin-bottom:8px;">过去</div>
               <p style="font-size:14px; color:rgba(255,255,255,.5); line-height:1.8;">社交互动数据即品牌效果证明<br>达人投放 = 品牌曝光的新形式</p>
             </div>
-            <div style="text-align:center; margin:10px 0; font-size:20px;">🕐</div>
+            <div style="text-align:center; margin:10px 0; font-size:22px; color:rgba(255,255,255,.5);">↓</div>
             <div style="background:rgba(232,25,44,.10); border:1px solid rgba(232,25,44,.3); border-radius:10px; padding:14px 16px;">
               <div style="font-size:11px; font-weight:700; color:#e8192c; letter-spacing:1.5px; margin-bottom:8px;">现在</div>
               <p style="font-size:14px; color:#fff; line-height:1.8; margin-bottom:6px;">仅 27% 达人广告能留下品牌记忆<br>动量 ≠ 品牌资产沉淀</p>
@@ -436,7 +429,7 @@
               <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,.35); letter-spacing:1.5px; margin-bottom:8px;">过去</div>
               <p style="font-size:14px; color:rgba(255,255,255,.5); line-height:1.8;">TVC大曝光是品牌建设唯一路径<br>货架时代 top-of-mind 决定购买</p>
             </div>
-            <div style="text-align:center; margin:10px 0; font-size:20px;">🕐</div>
+            <div style="text-align:center; margin:10px 0; font-size:22px; color:rgba(255,255,255,.5);">↓</div>
             <div style="background:rgba(232,25,44,.10); border:1px solid rgba(232,25,44,.3); border-radius:10px; padding:14px 16px;">
               <div style="font-size:11px; font-weight:700; color:#e8192c; letter-spacing:1.5px; margin-bottom:8px;">现在</div>
               <p style="font-size:14px; color:#fff; line-height:1.8; margin-bottom:6px;">硬广 block 注意力的优势仍在<br>但 CFO 质疑它、算不清楚它</p>
@@ -447,7 +440,8 @@
         </div><!-- /四象限 grid -->
       </div><!-- /四象限主体 -->
 
-    </div><!-- /主体 grid -->
+      </div><!-- /右侧列 -->
+    </div><!-- /整体布局 -->
 
     <!-- 底部总结条 -->
     <div style="background:linear-gradient(90deg,#0a1628,#160a28); border-top:1px solid rgba(255,255,255,.08); padding:22px 36px; display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
