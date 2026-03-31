@@ -48,7 +48,7 @@
     }
     .hero h1 { font-size: 48px; font-weight: 900; line-height: 1.15; letter-spacing: -1.5px; margin-bottom: 16px; }
     .hero h1 em { font-style: normal; color: #ff3060; }
-    .hero-sub { font-size: 16px; color: rgba(255,255,255,.45); line-height: 1.7; max-width: 560px; margin: 0 auto; }
+    .hero-sub { font-size: 16px; color: rgba(255,255,255,.45); line-height: 1.7; max-width: 620px; margin: 0 auto; }
 
     /* ── SECTION ── */
     .section { padding: 52px 64px; }
@@ -79,7 +79,6 @@
     }
     .pcell:last-child { border-right: none; }
 
-    /* P badge */
     .p-badge {
       width: 48px; height: 48px; border-radius: 14px;
       display: flex; align-items: center; justify-content: center;
@@ -119,26 +118,58 @@
     }
 
     /* ── TIMELINE ── */
-    .timeline-wrap { position: relative; }
-
-    /* 月份轴 */
-    .month-axis {
-      display: grid; grid-template-columns: 160px repeat(12, 1fr);
-      gap: 0; margin-bottom: 20px;
+    /* 26 weeks, scrollable */
+    .timeline-scroll-wrap {
+      overflow-x: auto;
+      padding-bottom: 8px;
     }
-    .month-axis .axis-label {
+    .timeline-inner {
+      min-width: 1400px; /* ensure enough room */
+    }
+
+    /* N_WEEKS = 26, each col = 1/26 of lane-grid */
+    /* Use CSS custom property for week count */
+    :root { --n: 26; }
+
+    .month-axis {
+      display: grid;
+      grid-template-columns: 160px repeat(var(--n), 1fr);
+      gap: 0; margin-bottom: 0;
+    }
+    .axis-label {
       font-size: 10px; font-weight: 700; color: rgba(255,255,255,.3);
       letter-spacing: 1px; text-transform: uppercase;
-      padding: 0 0 8px 8px;
+      padding: 0 0 8px 8px; display: flex; align-items: flex-end;
     }
-    .month-col {
-      text-align: center; font-size: 10px; font-weight: 700;
-      color: rgba(255,255,255,.25); padding-bottom: 8px;
-      border-left: 1px solid rgba(255,255,255,.06);
+
+    /* Week columns — show only W1, W4, W8, W12, W16, W20, W24, W26 labels to avoid clutter */
+    .week-col {
+      text-align: center; font-size: 9px; font-weight: 700;
+      color: rgba(255,255,255,.2); padding-bottom: 6px;
+      border-left: 1px solid rgba(255,255,255,.05);
+      min-width: 0;
+    }
+    .week-col.labeled { color: rgba(255,255,255,.35); }
+    /* Month band row */
+    .month-band-row {
+      display: grid;
+      grid-template-columns: 160px repeat(var(--n), 1fr);
+      gap: 0; margin-bottom: 4px;
+    }
+    .month-band {
+      font-size: 9px; font-weight: 800; letter-spacing: 1px;
+      text-transform: uppercase; color: rgba(255,255,255,.18);
+      border-left: 1px solid rgba(255,255,255,.08);
+      padding: 2px 0 2px 4px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
 
     /* Swimlane */
-    .lane { display: grid; grid-template-columns: 160px repeat(12, 1fr); gap: 0; margin-bottom: 4px; align-items: center; min-height: 44px; }
+    .lane {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 0; margin-bottom: 4px; align-items: center; min-height: 44px;
+    }
     .lane-label {
       font-size: 11px; font-weight: 800; color: rgba(255,255,255,.35);
       padding: 0 12px 0 0; letter-spacing: .5px;
@@ -147,28 +178,44 @@
     .lane-label .dot {
       width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; flex-shrink: 0;
     }
-    .lane-grid { grid-column: 2 / 14; display: grid; grid-template-columns: repeat(12, 1fr); position: relative; }
+    .lane-grid {
+      display: grid;
+      grid-template-columns: repeat(var(--n), 1fr);
+      position: relative;
+    }
+
+    /* Grid background lines */
+    .lane-grid::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(
+        to right,
+        transparent,
+        transparent calc(100% / var(--n) - 1px),
+        rgba(255,255,255,.04) calc(100% / var(--n) - 1px),
+        rgba(255,255,255,.04) calc(100% / var(--n))
+      );
+      pointer-events: none;
+    }
 
     /* Bar */
     .bar {
       position: absolute; top: 50%; transform: translateY(-50%);
-      height: 30px; border-radius: 8px;
+      height: 28px; border-radius: 7px;
       display: flex; align-items: center; padding: 0 10px;
       font-size: 10px; font-weight: 700; white-space: nowrap;
       overflow: hidden; text-overflow: ellipsis;
     }
-    .bar-a { background: rgba(255,48,96,.25); color: #ff9090; border: 1px solid rgba(255,48,96,.4); }
-    .bar-b { background: rgba(255,180,40,.2); color: #ffd070; border: 1px solid rgba(255,180,40,.35); }
-    .bar-c { background: rgba(40,180,80,.18); color: #70e090; border: 1px solid rgba(40,180,80,.3); }
-    .bar-x { background: rgba(180,180,255,.12); color: rgba(200,200,255,.7); border: 1px solid rgba(180,180,255,.2); }
+    .bar-a { background: rgba(255,48,96,.28); color: #ff9090; border: 1px solid rgba(255,48,96,.45); }
+    .bar-b { background: rgba(255,180,40,.22); color: #ffd070; border: 1px solid rgba(255,180,40,.38); }
+    .bar-c { background: rgba(40,180,80,.2); color: #70e090; border: 1px solid rgba(40,180,80,.32); }
 
     /* milestone star */
     .milestone {
       position: absolute; top: 50%; transform: translate(-50%,-50%);
-      width: 28px; height: 28px; border-radius: 50%;
+      width: 26px; height: 26px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 13px; z-index: 10;
-      box-shadow: 0 0 12px currentColor;
+      font-size: 12px; z-index: 10;
     }
     .ms-a { background: #ff3060; color: #fff; box-shadow: 0 0 14px rgba(255,48,96,.6); }
     .ms-b { background: #c09010; color: #fff; box-shadow: 0 0 14px rgba(255,180,40,.5); }
@@ -176,11 +223,35 @@
 
     /* section separator */
     .lane-section-label {
-      grid-column: 1 / 14; padding: 18px 0 6px;
+      grid-column: 1 / -1; padding: 18px 0 6px;
       font-size: 10px; font-weight: 900; letter-spacing: 2.5px;
       text-transform: uppercase; color: rgba(255,255,255,.2);
       border-top: 1px solid rgba(255,255,255,.06); margin-top: 8px;
     }
+    .lane.sep { min-height: auto; }
+
+    /* milestone caption lane */
+    .caption-lane {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 0; margin-top: -4px; margin-bottom: 4px;
+    }
+    .caption-lane-label {
+      font-size: 10px; color: rgba(255,255,255,.25); padding-left: 16px;
+    }
+    .caption-lane-grid {
+      display: grid;
+      grid-template-columns: repeat(var(--n), 1fr);
+      position: relative; height: 20px;
+    }
+    .caption-text {
+      position: absolute; transform: translateX(-50%);
+      font-size: 10px; font-weight: 700; white-space: nowrap;
+      top: 0;
+    }
+    .cap-a { color: #ff9090; }
+    .cap-b { color: #ffd060; }
+    .cap-c { color: #70e090; }
 
     /* collab section */
     .collab-grid {
@@ -196,12 +267,8 @@
       text-transform: uppercase; color: rgba(255,255,255,.25);
       margin-bottom: 8px;
     }
-    .collab-name {
-      font-size: 14px; font-weight: 900; color: #fff; margin-bottom: 6px; line-height: 1.3;
-    }
-    .collab-desc {
-      font-size: 12px; color: rgba(255,255,255,.45); line-height: 1.6; margin-bottom: 12px;
-    }
+    .collab-name { font-size: 14px; font-weight: 900; color: #fff; margin-bottom: 6px; line-height: 1.3; }
+    .collab-desc { font-size: 12px; color: rgba(255,255,255,.45); line-height: 1.6; margin-bottom: 12px; }
     .collab-tags { display: flex; flex-wrap: wrap; gap: 5px; }
     .collab-tag {
       font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 8px;
@@ -213,6 +280,15 @@
     .collab-tag.c { background: rgba(40,180,80,.1); color: #70e090; border-color: rgba(40,180,80,.2); }
 
     .divider { height: 1px; background: rgba(255,255,255,.07); margin: 0 64px; }
+
+    /* Speed badge */
+    .speed-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,48,96,.12); border: 1px solid rgba(255,48,96,.3);
+      color: #ff9090; font-size: 11px; font-weight: 800;
+      padding: 4px 12px; border-radius: 20px; margin-left: 12px;
+      letter-spacing: .5px;
+    }
   </style>
 </head>
 <body>
@@ -233,7 +309,7 @@
 <div class="hero">
   <div class="hero-eyebrow">Strategy & Roadmap</div>
   <h1>Solution <em>优先级</em><br>与执行路线图</h1>
-  <p class="hero-sub">从最高确定性的国际成熟品牌出发，用数据和案例逐步解锁更高难度的市场——12个月从0到规模化。</p>
+  <p class="hero-sub">Solution A 全速冲刺 8 周完全上线，B & C 在 6 个月内落地——用数据和案例串联，避免资源分散。</p>
 </div>
 
 <!-- ══ PRIORITY MATRIX ══ -->
@@ -358,155 +434,236 @@
 
 <!-- ══ TIMELINE ══ -->
 <div class="section">
-  <div class="section-label">12-Month Roadmap</div>
-  <div class="section-title">执行路线图</div>
-  <div class="section-sub">从 Solution A MVP 试跑出发，用数据和案例逐步解锁 B、C——按优先级串联，避免资源分散。</div>
+  <div class="section-label">26-Week Roadmap</div>
+  <div class="section-title">执行路线图 <span class="speed-badge">⚡ 加速版</span></div>
+  <div class="section-sub">Solution A 8 周内完全上线 + 批量副牌 & case 产出；Solution B & C 在 W26（约6个月）内落地。</div>
 
-  <div class="timeline-wrap">
-    <!-- 月份轴 -->
-    <div class="month-axis">
-      <div class="axis-label">Lane</div>
-      <div class="month-col">M1</div><div class="month-col">M2</div><div class="month-col">M3</div>
-      <div class="month-col">M4</div><div class="month-col">M5</div><div class="month-col">M6</div>
-      <div class="month-col">M7</div><div class="month-col">M8</div><div class="month-col">M9</div>
-      <div class="month-col">M10</div><div class="month-col">M11</div><div class="month-col">M12</div>
-    </div>
+  <div class="timeline-scroll-wrap">
+    <div class="timeline-inner">
 
-    <!-- ─ SOLUTION A ─ -->
-    <div class="lane"><div class="lane-section-label">🔴 Solution A — 国际成熟品牌 · 品牌心智度量体系</div></div>
+      <!--
+        26 weeks total.
+        left% = (week_start - 1) / 26 * 100
+        width% = (week_count) / 26 * 100
+        Helper: 1/26 ≈ 3.846%
+      -->
 
-    <div class="lane">
-      <div class="lane-label"><span class="dot" style="background:#ff3060"></span>MVP 试跑</div>
-      <div class="lane-grid" style="position:relative;height:44px;">
-        <!-- M1-M3 -->
-        <div class="bar bar-a" style="left:0%;width:25%;top:50%;transform:translateY(-50%)">Brand Imagery 手工 MVP</div>
-        <!-- milestone M3 -->
-        <div class="milestone ms-a" style="left:25%">⭐</div>
+      <!-- ── Month band ── -->
+      <!-- M1=W1-W4, M2=W5-W8, M3=W9-W13, M4=W14-W17, M5=W18-W21, M6=W22-W26 -->
+      <div class="month-band-row">
+        <div style="font-size:10px;color:rgba(255,255,255,.2);padding:2px 0 2px 8px;letter-spacing:1px;text-transform:uppercase;font-weight:800;">Lane</div>
+        <!-- M1: W1-W4, cols 1-4 => span 4 -->
+        <div class="month-band" style="grid-column: span 4;">M1</div>
+        <!-- M2: W5-W8, cols 5-8 => span 4 -->
+        <div class="month-band" style="grid-column: span 4;">M2</div>
+        <!-- M3: W9-W13, cols 9-13 => span 5 -->
+        <div class="month-band" style="grid-column: span 5;">M3</div>
+        <!-- M4: W14-W17, cols 14-17 => span 4 -->
+        <div class="month-band" style="grid-column: span 4;">M4</div>
+        <!-- M5: W18-W21, cols 18-21 => span 4 -->
+        <div class="month-band" style="grid-column: span 4;">M5</div>
+        <!-- M6: W22-W26, cols 22-26 => span 5 -->
+        <div class="month-band" style="grid-column: span 5;">M6</div>
       </div>
-    </div>
-    <div class="lane" style="margin-top:-4px;margin-bottom:4px;">
-      <div class="lane-label" style="font-size:10px;color:rgba(255,255,255,.25);padding-left:16px;">M3 milestone</div>
-      <div class="lane-grid" style="height:20px;position:relative;">
-        <div style="position:absolute;left:25%;transform:translateX(-50%);font-size:10px;color:#ff9090;font-weight:700;white-space:nowrap;">首个品牌归因案例产出</div>
-      </div>
-    </div>
 
-    <div class="lane">
-      <div class="lane-label"><span class="dot" style="background:#ff3060"></span>产品化开发</div>
-      <div class="lane-grid" style="position:relative;height:44px;">
-        <!-- M2-M6 -->
-        <div class="bar bar-a" style="left:8.3%;width:41.7%;top:50%;transform:translateY(-50%)">灵犀品牌心智度量工具开发</div>
+      <!-- ── Week axis ── -->
+      <div class="month-axis">
+        <div class="axis-label">Lane</div>
+        <!-- W1-W26 -->
+        <div class="week-col labeled">W1</div>
+        <div class="week-col">W2</div>
+        <div class="week-col">W3</div>
+        <div class="week-col">W4</div>
+        <div class="week-col labeled">W5</div>
+        <div class="week-col">W6</div>
+        <div class="week-col">W7</div>
+        <div class="week-col labeled">W8</div>
+        <div class="week-col">W9</div>
+        <div class="week-col">W10</div>
+        <div class="week-col labeled">W11</div>
+        <div class="week-col">W12</div>
+        <div class="week-col labeled">W13</div>
+        <div class="week-col">W14</div>
+        <div class="week-col">W15</div>
+        <div class="week-col labeled">W16</div>
+        <div class="week-col">W17</div>
+        <div class="week-col">W18</div>
+        <div class="week-col">W19</div>
+        <div class="week-col labeled">W20</div>
+        <div class="week-col">W21</div>
+        <div class="week-col">W22</div>
+        <div class="week-col">W23</div>
+        <div class="week-col labeled">W24</div>
+        <div class="week-col">W25</div>
+        <div class="week-col labeled">W26</div>
       </div>
-    </div>
 
-    <div class="lane">
-      <div class="lane-label"><span class="dot" style="background:#ff3060"></span>一方数据优化</div>
-      <div class="lane-grid" style="position:relative;height:44px;">
-        <!-- M3-M5 -->
-        <div class="bar bar-a" style="left:16.7%;width:25%;top:50%;transform:translateY(-50%)">一方数据定义行业 Importance</div>
-      </div>
-    </div>
+      <!-- ════ SOLUTION A ════ -->
+      <div class="lane sep"><div class="lane-section-label">🔴 Solution A — 国际成熟品牌 · 品牌心智度量体系</div></div>
 
-    <div class="lane">
-      <div class="lane-label"><span class="dot" style="background:#ff3060"></span>规模化覆盖</div>
-      <div class="lane-grid" style="position:relative;height:44px;">
-        <!-- M6-M12 -->
-        <div class="bar bar-a" style="left:41.7%;width:58.3%;top:50%;transform:translateY(-50%)">Solution A 规模化 — 多行业客户覆盖</div>
-        <div class="milestone ms-a" style="left:41.7%">⭐</div>
+      <!-- MVP 试跑: W1-W3 -->
+      <div class="lane">
+        <div class="lane-label"><span class="dot" style="background:#ff3060"></span>MVP 试跑</div>
+        <div class="lane-grid" style="position:relative;height:44px;">
+          <!-- W1-W3: left=0%, width=3/26*100=11.54% -->
+          <div class="bar bar-a" style="left:0%;width:11.54%;top:50%;transform:translateY(-50%)">Brand Imagery 手工 MVP</div>
+          <!-- milestone W3 end: left=3/26*100=11.54% -->
+          <div class="milestone ms-a" style="left:11.54%">⭐</div>
+        </div>
       </div>
-    </div>
-    <div class="lane" style="margin-top:-4px;margin-bottom:12px;">
-      <div class="lane-label" style="font-size:10px;color:rgba(255,255,255,.25);padding-left:16px;">M6 milestone</div>
-      <div class="lane-grid" style="height:20px;position:relative;">
-        <div style="position:absolute;left:41.7%;transform:translateX(-50%);font-size:10px;color:#ff9090;font-weight:700;white-space:nowrap;">产品上线 + 首批规模化客户签约</div>
+      <div class="caption-lane">
+        <div class="caption-lane-label">W3 milestone</div>
+        <div class="caption-lane-grid">
+          <div class="caption-text cap-a" style="left:11.54%">首个品牌归因案例产出</div>
+        </div>
       </div>
-    </div>
 
-    <!-- ─ SOLUTION B ─ -->
-    <div class="lane"><div class="lane-section-label">🟡 Solution B — 有钱国企 · 国民品牌焕新引擎</div></div>
-
-    <div class="lane">
-      <div class="lane-label"><span class="dot" style="background:#c09010"></span>央/卫视谈判</div>
-      <div class="lane-grid" style="position:relative;height:44px;">
-        <!-- M3-M6 -->
-        <div class="bar bar-b" style="left:16.7%;width:33.3%;top:50%;transform:translateY(-50%)">央视/卫视 IP 资源谈判 & 框架协议</div>
+      <!-- 产品化开发: W2-W6 -->
+      <div class="lane">
+        <div class="lane-label"><span class="dot" style="background:#ff3060"></span>产品化开发</div>
+        <div class="lane-grid" style="position:relative;height:44px;">
+          <!-- W2-W6: left=1/26*100=3.85%, width=5/26*100=19.23% -->
+          <div class="bar bar-a" style="left:3.85%;width:19.23%;top:50%;transform:translateY(-50%)">灵犀品牌心智度量工具开发</div>
+        </div>
       </div>
-    </div>
 
-    <div class="lane">
-      <div class="lane-label"><span class="dot" style="background:#c09010"></span>定制IP方案</div>
-      <div class="lane-grid" style="position:relative;height:44px;">
-        <!-- M5-M7 -->
-        <div class="bar bar-b" style="left:33.3%;width:25%;top:50%;transform:translateY(-50%)">定制 IP 解决方案策划</div>
+      <!-- 一方数据优化: W3-W5 -->
+      <div class="lane">
+        <div class="lane-label"><span class="dot" style="background:#ff3060"></span>一方数据优化</div>
+        <div class="lane-grid" style="position:relative;height:44px;">
+          <!-- W3-W5: left=2/26*100=7.69%, width=3/26*100=11.54% -->
+          <div class="bar bar-a" style="left:7.69%;width:11.54%;top:50%;transform:translateY(-50%)">一方数据定义行业 Importance</div>
+        </div>
       </div>
-    </div>
 
-    <div class="lane">
-      <div class="lane-label"><span class="dot" style="background:#c09010"></span>招商 & 落地</div>
-      <div class="lane-grid" style="position:relative;height:44px;">
-        <!-- M7-M9 -->
-        <div class="bar bar-b" style="left:50%;width:25%;top:50%;transform:translateY(-50%)">客户招商 → IP 联合落地执行</div>
+      <!-- 产品上线: W6-W8（完全上线） -->
+      <div class="lane">
+        <div class="lane-label"><span class="dot" style="background:#ff3060"></span>产品上线</div>
+        <div class="lane-grid" style="position:relative;height:44px;">
+          <!-- W6-W8: left=5/26*100=19.23%, width=3/26*100=11.54% -->
+          <div class="bar bar-a" style="left:19.23%;width:11.54%;top:50%;transform:translateY(-50%);background:rgba(255,48,96,.42);border-color:rgba(255,48,96,.7);">✅ 产品完全上线</div>
+          <div class="milestone ms-a" style="left:30.77%">⭐</div>
+        </div>
       </div>
-    </div>
+      <div class="caption-lane">
+        <div class="caption-lane-label">W8 milestone</div>
+        <div class="caption-lane-grid">
+          <div class="caption-text cap-a" style="left:30.77%">Solution A 完全上线 · 首批规模化客户签约</div>
+        </div>
+      </div>
 
-    <div class="lane">
-      <div class="lane-label"><span class="dot" style="background:#c09010"></span>复盘 & 案例</div>
-      <div class="lane-grid" style="position:relative;height:44px;">
-        <!-- M10-M12 -->
-        <div class="bar bar-b" style="left:75%;width:25%;top:50%;transform:translateY(-50%)">年轻化报告 + 案例产出</div>
-        <div class="milestone ms-b" style="left:75%">⭐</div>
+      <!-- 批量副牌 + case: W7-W13 -->
+      <div class="lane">
+        <div class="lane-label"><span class="dot" style="background:#ff3060"></span>批量副牌 & Case</div>
+        <div class="lane-grid" style="position:relative;height:44px;">
+          <!-- W7-W13: left=6/26*100=23.08%, width=7/26*100=26.92% -->
+          <div class="bar bar-a" style="left:23.08%;width:26.92%;top:50%;transform:translateY(-50%)">批量副牌覆盖 + 多行业 Case 产出</div>
+        </div>
       </div>
-    </div>
-    <div class="lane" style="margin-top:-4px;margin-bottom:12px;">
-      <div class="lane-label" style="font-size:10px;color:rgba(255,255,255,.25);padding-left:16px;">M10 milestone</div>
-      <div class="lane-grid" style="height:20px;position:relative;">
-        <div style="position:absolute;left:75%;transform:translateX(-50%);font-size:10px;color:#ffd060;font-weight:700;white-space:nowrap;">首个年轻化报告 + Solution B 标杆案例</div>
-      </div>
-    </div>
 
-    <!-- ─ SOLUTION C ─ -->
-    <div class="lane"><div class="lane-section-label">🟢 Solution C — 白牌新兴品牌 · Red Brand Studio</div></div>
-
-    <div class="lane">
-      <div class="lane-label"><span class="dot" style="background:#1a8a4a"></span>Red Partners 招标</div>
-      <div class="lane-grid" style="position:relative;height:44px;">
-        <!-- M4-M6 -->
-        <div class="bar bar-c" style="left:25%;width:25%;top:50%;transform:translateY(-50%)">外部品牌咨询公司筛选 & 招标</div>
+      <!-- 规模化覆盖: W9-W26 -->
+      <div class="lane" style="margin-bottom:12px;">
+        <div class="lane-label"><span class="dot" style="background:#ff3060"></span>规模化覆盖</div>
+        <div class="lane-grid" style="position:relative;height:44px;">
+          <!-- W9-W26: left=8/26*100=30.77%, width=18/26*100=69.23% -->
+          <div class="bar bar-a" style="left:30.77%;width:69.23%;top:50%;transform:translateY(-50%);opacity:.7;">Solution A 规模化 — 持续多行业客户覆盖</div>
+        </div>
       </div>
-    </div>
 
-    <div class="lane">
-      <div class="lane-label"><span class="dot" style="background:#1a8a4a"></span>品牌招募</div>
-      <div class="lane-grid" style="position:relative;height:44px;">
-        <!-- M6-M8 -->
-        <div class="bar bar-c" style="left:41.7%;width:16.7%;top:50%;transform:translateY(-50%)">Red Brand Studio 首批品牌招募</div>
-      </div>
-    </div>
+      <!-- ════ SOLUTION B ════ -->
+      <div class="lane sep"><div class="lane-section-label">🟡 Solution B — 有钱国企 · 国民品牌焕新引擎</div></div>
 
-    <div class="lane">
-      <div class="lane-label"><span class="dot" style="background:#1a8a4a"></span>定制共创</div>
-      <div class="lane-grid" style="position:relative;height:44px;">
-        <!-- M7-M9 -->
-        <div class="bar bar-c" style="left:50%;width:25%;top:50%;transform:translateY(-50%)">品牌定位诊断 × 视觉语言共创</div>
+      <!-- 央/卫视谈判: W5-W12 -->
+      <div class="lane">
+        <div class="lane-label"><span class="dot" style="background:#c09010"></span>央/卫视谈判</div>
+        <div class="lane-grid" style="position:relative;height:44px;">
+          <!-- W5-W12: left=4/26*100=15.38%, width=8/26*100=30.77% -->
+          <div class="bar bar-b" style="left:15.38%;width:30.77%;top:50%;transform:translateY(-50%)">央视/卫视 IP 资源谈判 & 框架协议</div>
+        </div>
       </div>
-    </div>
 
-    <div class="lane">
-      <div class="lane-label"><span class="dot" style="background:#1a8a4a"></span>落地 & 复盘</div>
-      <div class="lane-grid" style="position:relative;height:44px;">
-        <!-- M9-M12 -->
-        <div class="bar bar-c" style="left:66.7%;width:33.3%;top:50%;transform:translateY(-50%)">KFS 内容落地 → 品牌成效复盘报告</div>
-        <div class="milestone ms-c" style="left:100%">⭐</div>
+      <!-- 定制IP方案: W10-W16 -->
+      <div class="lane">
+        <div class="lane-label"><span class="dot" style="background:#c09010"></span>定制IP方案</div>
+        <div class="lane-grid" style="position:relative;height:44px;">
+          <!-- W10-W16: left=9/26*100=34.62%, width=7/26*100=26.92% -->
+          <div class="bar bar-b" style="left:34.62%;width:26.92%;top:50%;transform:translateY(-50%)">定制 IP 解决方案策划</div>
+        </div>
       </div>
-    </div>
-    <div class="lane" style="margin-top:-4px;margin-bottom:12px;">
-      <div class="lane-label" style="font-size:10px;color:rgba(255,255,255,.25);padding-left:16px;">M12 milestone</div>
-      <div class="lane-grid" style="height:20px;position:relative;">
-        <div style="position:absolute;left:100%;transform:translateX(-100%);font-size:10px;color:#70e090;font-weight:700;white-space:nowrap;">首个品牌跃迁案例 + Red Brand Studio 模型验证</div>
-      </div>
-    </div>
 
-  </div>
+      <!-- 招商 & 落地: W15-W22 -->
+      <div class="lane">
+        <div class="lane-label"><span class="dot" style="background:#c09010"></span>招商 & 落地</div>
+        <div class="lane-grid" style="position:relative;height:44px;">
+          <!-- W15-W22: left=14/26*100=53.85%, width=8/26*100=30.77% -->
+          <div class="bar bar-b" style="left:53.85%;width:30.77%;top:50%;transform:translateY(-50%)">客户招商 → IP 联合落地执行</div>
+        </div>
+      </div>
+
+      <!-- 复盘 & 案例: W23-W26 -->
+      <div class="lane">
+        <div class="lane-label"><span class="dot" style="background:#c09010"></span>复盘 & 案例</div>
+        <div class="lane-grid" style="position:relative;height:44px;">
+          <!-- W23-W26: left=22/26*100=84.62%, width=4/26*100=15.38% -->
+          <div class="bar bar-b" style="left:84.62%;width:15.38%;top:50%;transform:translateY(-50%)">年轻化报告 + 案例产出</div>
+          <div class="milestone ms-b" style="left:100%">⭐</div>
+        </div>
+      </div>
+      <div class="caption-lane" style="margin-bottom:12px;">
+        <div class="caption-lane-label">W26 milestone</div>
+        <div class="caption-lane-grid">
+          <div class="caption-text cap-b" style="left:100%;transform:translateX(-100%);">首个年轻化报告 + Solution B 标杆案例</div>
+        </div>
+      </div>
+
+      <!-- ════ SOLUTION C ════ -->
+      <div class="lane sep"><div class="lane-section-label">🟢 Solution C — 白牌新兴品牌 · Red Brand Studio</div></div>
+
+      <!-- Red Partners 招标: W7-W12 -->
+      <div class="lane">
+        <div class="lane-label"><span class="dot" style="background:#1a8a4a"></span>Red Partners 招标</div>
+        <div class="lane-grid" style="position:relative;height:44px;">
+          <!-- W7-W12: left=6/26*100=23.08%, width=6/26*100=23.08% -->
+          <div class="bar bar-c" style="left:23.08%;width:23.08%;top:50%;transform:translateY(-50%)">外部品牌咨询公司筛选 & 招标</div>
+        </div>
+      </div>
+
+      <!-- 品牌招募: W11-W16 -->
+      <div class="lane">
+        <div class="lane-label"><span class="dot" style="background:#1a8a4a"></span>品牌招募</div>
+        <div class="lane-grid" style="position:relative;height:44px;">
+          <!-- W11-W16: left=10/26*100=38.46%, width=6/26*100=23.08% -->
+          <div class="bar bar-c" style="left:38.46%;width:23.08%;top:50%;transform:translateY(-50%)">Red Brand Studio 首批品牌招募</div>
+        </div>
+      </div>
+
+      <!-- 定制共创: W15-W21 -->
+      <div class="lane">
+        <div class="lane-label"><span class="dot" style="background:#1a8a4a"></span>定制共创</div>
+        <div class="lane-grid" style="position:relative;height:44px;">
+          <!-- W15-W21: left=14/26*100=53.85%, width=7/26*100=26.92% -->
+          <div class="bar bar-c" style="left:53.85%;width:26.92%;top:50%;transform:translateY(-50%)">品牌定位诊断 × 视觉语言共创</div>
+        </div>
+      </div>
+
+      <!-- 落地 & 复盘: W20-W26 -->
+      <div class="lane">
+        <div class="lane-label"><span class="dot" style="background:#1a8a4a"></span>落地 & 复盘</div>
+        <div class="lane-grid" style="position:relative;height:44px;">
+          <!-- W20-W26: left=19/26*100=73.08%, width=7/26*100=26.92% -->
+          <div class="bar bar-c" style="left:73.08%;width:26.92%;top:50%;transform:translateY(-50%)">KFS 内容落地 → 品牌成效复盘报告</div>
+          <div class="milestone ms-c" style="left:100%">⭐</div>
+        </div>
+      </div>
+      <div class="caption-lane" style="margin-bottom:12px;">
+        <div class="caption-lane-label">W26 milestone</div>
+        <div class="caption-lane-grid">
+          <div class="caption-text cap-c" style="left:100%;transform:translateX(-100%);">首个品牌跃迁案例 + Red Brand Studio 模型验证</div>
+        </div>
+      </div>
+
+    </div><!-- /timeline-inner -->
+  </div><!-- /timeline-scroll-wrap -->
 </div>
 
 <div class="divider"></div>
